@@ -2,7 +2,6 @@ package com.halycon.maze.simulation.entity.state;
 
 import java.util.List;
 
-import com.halycon.maze.simulation.entity.TimedAction;
 
 public class StateChangeTiming<T> {
 

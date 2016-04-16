@@ -1,4 +1,4 @@
-package com.halycon.maze.simulation.entity;
+package com.halycon.maze.simulation.entity.state;
 
 public class TimedAction<T> {
 

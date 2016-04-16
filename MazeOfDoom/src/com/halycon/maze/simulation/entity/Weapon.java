@@ -8,6 +8,7 @@ import com.halycon.maze.core.Direction;
 import com.halycon.maze.core.Vector;
 import com.halycon.maze.simulation.entity.state.AttackState;
 import com.halycon.maze.simulation.entity.state.StateChangeTiming;
+import com.halycon.maze.simulation.entity.state.TimedAction;
 
 
 public class Weapon extends Entity {
