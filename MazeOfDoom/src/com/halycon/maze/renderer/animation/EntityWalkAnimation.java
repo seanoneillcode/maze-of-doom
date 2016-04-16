@@ -11,7 +11,7 @@ import com.halycon.maze.simulation.entity.state.CanBeAnimated;
 public class EntityWalkAnimation implements Animation {
 	
 	private float walkTimer = 0f;
-	private static final float LIMIT =  0.1f;
+	private static final float LIMIT =  0.15f;
 	private Vector position;
 	ImageList image;
 	Direction direction;

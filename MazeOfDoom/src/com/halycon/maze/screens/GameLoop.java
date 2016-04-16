@@ -2,6 +2,7 @@ package com.halycon.maze.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.halycon.maze.business.DefaultConstants;
 import com.halycon.maze.renderer.Renderer;
 import com.halycon.maze.simulation.Simulation;
