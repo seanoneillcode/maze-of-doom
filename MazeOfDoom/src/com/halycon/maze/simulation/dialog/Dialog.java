@@ -7,7 +7,7 @@ import java.util.List;
 public class Dialog {
 
 	private String currentText;
-	private static final float CHAR_PAUSE = 0.05f;
+	private static final float CHAR_PAUSE = 0.025f;
 	private float charTimer = 0;
 	private static final String SPACE_STRING = " ";
 	private static final String NEWLINE_STRING = "/n";
