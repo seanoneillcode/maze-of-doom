@@ -42,7 +42,6 @@ public class Weapon extends Entity {
 	public void attack(Direction direction) {
 		stateChangeTiming.start();
 		this.direction = direction;
-		
 	}
 	
 	public void update(float delta, Vector position) {

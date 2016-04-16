@@ -34,6 +34,7 @@ public class Player extends MovingEntity implements CanBeAnimated, CanBeDamaged 
 		isUsing = false;
 		useEntity = new Entity(position, DefaultConstants.USE_SIZE);
 		inventory = new Inventory();
+		inventory.addItem(InventoryItem.SWORD);
 	}
 	
 	public void attack() {

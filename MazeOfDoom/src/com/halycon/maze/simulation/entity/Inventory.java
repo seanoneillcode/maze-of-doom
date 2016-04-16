@@ -1,25 +1,27 @@
 package com.halycon.maze.simulation.entity;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Inventory {
 
-	Set<InventoryItem> items;
+	Map<InventoryItem, Integer> items;
 	
 	public Inventory() {
-		items = new HashSet<InventoryItem>();
-	}
-	
-	public Set<InventoryItem> getItems() {
-		return items;
+		items = new HashMap<InventoryItem, Integer>();
 	}
 	
 	public void addItem(InventoryItem item) {
-		items.add(item);
+		Integer amount = items.get(item);
+		items.put(item, amount == null ? 1 : amount + 1);
+	}
+	
+	public void removeItem(InventoryItem item) {
+		Integer amount = items.get(item);
+		items.put(item, amount == null || amount == 0 ? 0 : amount - 1);
 	}
 	
 	public boolean hasItem(InventoryItem item) {
-		return items.contains(item);
+		return items.containsKey(item);
 	}
 }

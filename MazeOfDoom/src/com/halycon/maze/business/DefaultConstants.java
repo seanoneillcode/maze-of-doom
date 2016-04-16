@@ -7,8 +7,8 @@ public class DefaultConstants {
 	
 	public static final float UNIT_SIZE = 1.0f;
 	public static final float TILE_SIZE = UNIT_SIZE * 16;
-	public static final Vector DEFAULT_SPEED = new Vector(64, 64);
-	public static final Vector PLAYER_SPEED = new Vector(64, 64);
+	public static final Vector DEFAULT_SPEED = new Vector(48, 48);
+	public static final Vector PLAYER_SPEED = new Vector(48, 48);
 	public static final Vector PLAYER_SIZE = new Vector(12, 10);
 	public static final Vector USE_SIZE = new Vector(2, 2);
 	public static final Vector PLAYER_OFFSET = new Vector(-2, 0);
