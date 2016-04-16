@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="18" height="14" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="messing" tilewidth="16" tileheight="16">
+  <image source="castlemessing.png" width="128" height="128"/>
+ </tileset>
+ <layer name="ground" width="18" height="14">
+  <data encoding="base64" compression="zlib">
+   eJwzY2BgMBuEWBUNE1KDyxx7LGbhw8S6hwcLJsYceRxsdDWqeORJDUdqxQc94pWYMEQPO0LmEBvX5LiHWHNIDRdiwoBQuGATAwDbKi/2
+  </data>
+ </layer>
+ <layer name="walls" width="18" height="14">
+  <data encoding="base64" compression="zlib">
+   eJxjYIAAMyRMCeBFw4TUYAMsWMRYCahBlycXYDOHmu4RRcO41DDgkR9sQAaIZZGwHJnmqKDx1ahkDrmAWu7RAWJdJKxHgZsozaMArDkEOw==
+  </data>
+ </layer>
+ <objectgroup name="objects" width="18" height="14">
+  <object name="link" x="32" y="48" width="16" height="16">
+   <properties>
+    <property name="direction" value="left"/>
+    <property name="node" value="castlelevel01"/>
+   </properties>
+  </object>
+  <object name="fall" x="96" y="176" width="64" height="32">
+   <properties>
+    <property name="link" value="castlelevel01"/>
+   </properties>
+  </object>
+  <object name="fall" x="96" y="144" width="80" height="16">
+   <properties>
+    <property name="link" value="castlelevel01"/>
+   </properties>
+  </object>
+  <object name="fall" x="96" y="64" width="80" height="16">
+   <properties>
+    <property name="link" value="castlelevel01"/>
+   </properties>
+  </object>
+  <object name="fall" x="96" y="32" width="80" height="16">
+   <properties>
+    <property name="link" value="castlelevel01"/>
+   </properties>
+  </object>
+  <object name="fall" x="160" y="80" width="32" height="80">
+   <properties>
+    <property name="link" value="castlelevel01"/>
+   </properties>
+  </object>
+  <object name="fall" x="208" y="80" width="48" height="48">
+   <properties>
+    <property name="link" value="castlelevel01"/>
+   </properties>
+  </object>
+  <object name="fall" x="256" y="128" width="16" height="80">
+   <properties>
+    <property name="link" value="castlelevel01"/>
+   </properties>
+  </object>
+  <object name="fall" x="176" y="144" width="64" height="48">
+   <properties>
+    <property name="link" value="castlelevel01"/>
+   </properties>
+  </object>
+  <object name="fall" x="160" y="208" width="96" height="16">
+   <properties>
+    <property name="link" value="castlelevel01"/>
+   </properties>
+  </object>
+  <object name="enemy" x="192" y="48" width="16" height="16">
+   <properties>
+    <property name="type" value="blob"/>
+   </properties>
+  </object>
+  <object name="enemy" x="176" y="192" width="16" height="16">
+   <properties>
+    <property name="type" value="blob"/>
+   </properties>
+  </object>
+  <object name="enemy" x="192" y="128" width="16" height="16">
+   <properties>
+    <property name="type" value="blob"/>
+   </properties>
+  </object>
+  <object name="enemy" x="240" y="128" width="16" height="16">
+   <properties>
+    <property name="type" value="blob"/>
+   </properties>
+  </object>
+  <object name="enemy" x="240" y="192" width="16" height="16">
+   <properties>
+    <property name="type" value="blob"/>
+   </properties>
+  </object>
+  <object name="enemy" x="160" y="160" width="16" height="16">
+   <properties>
+    <property name="type" value="blob"/>
+   </properties>
+  </object>
+  <object name="pickup" x="48" y="160" width="16" height="16">
+   <properties>
+    <property name="type" value="milk"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="cover" width="18" height="14">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjBQAAAPwAAE=
+  </data>
+ </layer>
+</map>

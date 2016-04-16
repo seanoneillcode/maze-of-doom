@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="10" height="9" tilewidth="16" tileheight="16" backgroundcolor="#000000">
+ <properties>
+  <property name="path" value="/res/min/house"/>
+ </properties>
+ <tileset firstgid="1" name="insideHouse" tilewidth="16" tileheight="16">
+  <image source="inside.png" width="160" height="48"/>
+ </tileset>
+ <layer name="ground" width="10" height="9">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgIB2w48BCQ0wdOuCA0jB1jGgYHTDiUIcNAwBIfzDcaAEAAA==
+  </data>
+ </layer>
+ <layer name="walls" width="10" height="9">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NggAAmIOYCYkEgFoKyQZgNiJkZEACkTgSIpYFYBsoWgcqhq8MF0NVxI/H5gZgXiPmwqOMh0jxi7GXEghnQ2NgAIxqNTx2yWQBDY3m1aAEAAA==
+  </data>
+ </layer>
+ <objectgroup name="objects" width="10" height="9">
+  <object name="link" x="112" y="112" width="16" height="16">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="node" value="clearing"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
