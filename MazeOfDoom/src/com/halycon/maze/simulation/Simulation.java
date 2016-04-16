@@ -59,13 +59,13 @@ public class Simulation {
 		if (!postDeath.isStarted()) {
 			level.update(player, delta);
 			CollisionHandler.resolveCollision(player, level.getActiveNode(), delta);
-			if (!level.isLoading() && !level.isPaused()) {
+			if (isActive()) {
 				player.update(delta);				
 			}
 		}
 	}
 	
 	public boolean isActive() {
-		return !this.getLevel().isPaused() && !this.getLevel().isLoading();
+		return !level.isPaused() && !level.isLoading();
 	}
 }

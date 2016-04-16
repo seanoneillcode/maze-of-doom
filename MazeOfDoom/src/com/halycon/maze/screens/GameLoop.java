@@ -5,12 +5,11 @@ import com.badlogic.gdx.Input.Keys;
 import com.halycon.maze.business.DefaultConstants;
 import com.halycon.maze.renderer.Renderer;
 import com.halycon.maze.simulation.Simulation;
-import com.halycon.maze.simulation.SimulationListener;
 import com.halycon.maze.simulation.entity.Player;
 
 
 
-public class GameLoop extends MazeScreen implements SimulationListener {
+public class GameLoop extends MazeScreen {
 
 	private Simulation simulation;
 	
