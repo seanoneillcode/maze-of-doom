@@ -32,7 +32,7 @@
   </object>
   <object name="dialog" x="96" y="112" width="16" height="16">
    <properties>
-    <property name="text" value="WARNING! /n slime creatures are toxic! /n Testing the newline string to see how it works. hopefully as EXPECTED"/>
+    <property name="text" value="west - tome of knowledge"/>
    </properties>
   </object>
   <object name="link" x="96" y="256" width="48" height="16">

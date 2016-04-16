@@ -46,7 +46,7 @@ public class Level {
 		nodes.put("boulderpuzzle", NodeLoader.load("nodes/boulder/boulderpuzzle01.tmx", "boulderpuzzle"));
 		nodes.put("castlelevel01", NodeLoader.load("nodes/door/castlelevel01.tmx", "castlelevel01"));
 		nodes.put("castlelevel02", NodeLoader.load("nodes/door/castlelevel02.tmx", "castlelevel02"));
-		activeNode = nodes.get("clearing");
+		activeNode = nodes.get("house");
 		activeEnemies = activeNode.getEnemies();
 		activePickups = activeNode.getPickups();
 		activeObsticles = activeNode.getObsticles();
