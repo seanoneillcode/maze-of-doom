@@ -64,4 +64,8 @@ public class Simulation {
 			}
 		}
 	}
+	
+	public boolean isActive() {
+		return !this.getLevel().isPaused() && !this.getLevel().isLoading();
+	}
 }

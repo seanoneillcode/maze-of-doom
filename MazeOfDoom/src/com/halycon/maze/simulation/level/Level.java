@@ -7,7 +7,6 @@ import java.util.Map;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.halycon.maze.business.DefaultConstants;
 import com.halycon.maze.core.Vector;
-import com.halycon.maze.core.VectorUtil;
 import com.halycon.maze.simulation.Event;
 import com.halycon.maze.simulation.dialog.Dialog;
 import com.halycon.maze.simulation.entity.CollisionHandler;
@@ -212,20 +211,20 @@ public class Level {
 				if (CollisionHandler.isColliding(player.getEntity(), enemy.getEntity())) {
 					if (player.canBeDamaged()) {
 						player.damage(1);
-						player.impulse(VectorUtil.getUnitVector(enemy.getPosition(), player.getPosition()).multiply(4));
+						player.impulse(Vector.getUnitVector(enemy.getPosition(), player.getPosition()).multiply(4));
 					}
 				}
 				if (player.getAttackState() == AttackState.END && CollisionHandler.isColliding(player.getWeaponEntity(), enemy.getEntity())) {
 					if (enemy.canBeDamaged()) {
 						enemy.damage(1);
-						enemy.impulse(VectorUtil.getUnitVector(player.getPosition(), enemy.getPosition()).multiply(6));
+						enemy.impulse(Vector.getUnitVector(player.getPosition(), enemy.getPosition()).multiply(6));
 					}
 				}
 				for (Enemy enemyOther : activeEnemies) {
 					if (enemyOther != enemy && enemyOther.getEntityState() != EntityState.DEAD) {
 						if (CollisionHandler.isColliding(enemyOther.getEntity(), enemy.getEntity())) {
-							enemy.impulse(VectorUtil.getUnitVector(enemyOther.getPosition(), enemy.getPosition()).multiply(2));
-							enemyOther.impulse(VectorUtil.getUnitVector(enemy.getPosition(), enemyOther.getPosition()).multiply(2));
+							enemy.impulse(Vector.getUnitVector(enemyOther.getPosition(), enemy.getPosition()).multiply(2));
+							enemyOther.impulse(Vector.getUnitVector(enemy.getPosition(), enemyOther.getPosition()).multiply(2));
 						}
 					}
 				}
@@ -235,7 +234,7 @@ public class Level {
 							CollisionHandler.resolveCollision(enemy, fall, delta);
 							if (CollisionHandler.isColliding(enemy, fall, delta)) {
 								enemy.damage(2);
-								enemy.impulse(VectorUtil.getUnitVector(player.getPosition(), enemy.getPosition()).multiply(3));
+								enemy.impulse(Vector.getUnitVector(player.getPosition(), enemy.getPosition()).multiply(3));
 							}
 						}
 					}

@@ -40,50 +40,63 @@ public class GameLoop extends MazeScreen implements SimulationListener {
 		}
 		
 		Player player = simulation.getPlayer();
-		if (Gdx.input.isKeyPressed(Keys.LEFT) && isPlayerActive()) {
-			if (player.canMove()) {
-				player.moveLeft(delta);
+		if (simulation.isActive()) {
+			if (Gdx.input.isKeyPressed(Keys.LEFT)) {
+				if (player.canMove()) {
+					player.moveLeft(delta);
+				}
 			}
-		}
-		if (Gdx.input.isKeyPressed(Keys.RIGHT) && isPlayerActive()) {
-			if (player.canMove()) {
-				player.moveRight(delta);
+			if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
+				if (player.canMove()) {
+					player.moveRight(delta);
+				}
 			}
-		}
-		if (Gdx.input.isKeyPressed(Keys.UP) && isPlayerActive()) {
-			if (player.canMove()) {
-				player.moveUp(delta);
+			if (Gdx.input.isKeyPressed(Keys.UP)) {
+				if (player.canMove()) {
+					player.moveUp(delta);
+				}
 			}
-		}
-		if (Gdx.input.isKeyPressed(Keys.DOWN) && isPlayerActive()) {
-			if (player.canMove()) {
-				player.moveDown(delta);
+			if (Gdx.input.isKeyPressed(Keys.DOWN)) {
+				if (player.canMove()) {
+					player.moveDown(delta);
+				}
 			}
-		}
-		if (Gdx.input.isKeyPressed(Keys.SPACE) && isPlayerActive()) {
-			player.dash();
-		}
-		if (Gdx.input.isKeyPressed(Keys.D)) {
-			if (isPlayerActive() && !keyDownUse) {
-				player.use();
+			if (Gdx.input.isKeyPressed(Keys.SPACE)) {
+				player.dash();
 			}
-			if (!keyDownUse) {
-				simulation.getLevel().use(player);
-				keyDownUse = true;
+			if (Gdx.input.isKeyPressed(Keys.D)) {
+				if (!keyDownUse) {
+					player.use();
+				}
+				if (!keyDownUse) {
+					simulation.getLevel().use(player);
+					keyDownUse = true;
+				}
+			} else {
+				player.stopUsing();
+				keyDownUse = false;
+			}
+			if (Gdx.input.isKeyPressed(Keys.F)) {
+				if (!keyDown) {
+					player.attack();
+					keyDown = true;
+				}
+			} else {
+				keyDown = false;
 			}
 		} else {
-			player.stopUsing();
-			keyDownUse = false;
-		}
-		
-		if (Gdx.input.isKeyPressed(Keys.F) && isPlayerActive()) {
-			if (!keyDown) {
-				player.attack();
-				keyDown = true;
+			if (Gdx.input.isKeyPressed(Keys.D)) {
+				if (!keyDownUse) {
+					simulation.getLevel().use(player);
+					keyDownUse = true;
+				}
+			} else {
+				player.stopUsing();
+				keyDownUse = false;
 			}
-		} else {
 			keyDown = false;
 		}
+		
 		if (Gdx.input.isKeyPressed(Keys.ESCAPE)) {
 			isDone = true;
 		}
@@ -93,11 +106,6 @@ public class GameLoop extends MazeScreen implements SimulationListener {
 		if (Gdx.input.isKeyPressed(Keys.PERIOD)) {
 			DefaultConstants.DEBUG_ENABLED = false;
 		}
-		
-	}
-	
-	private boolean isPlayerActive() {
-		return !simulation.getLevel().isPaused() && !simulation.getLevel().isLoading();
 	}
 
 	@Override
