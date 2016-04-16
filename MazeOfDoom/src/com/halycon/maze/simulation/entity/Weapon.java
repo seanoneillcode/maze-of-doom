@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.halycon.maze.business.DefaultConstants;
+import com.halycon.maze.core.Direction;
 import com.halycon.maze.core.Vector;
-import com.halycon.maze.simulation.common.Direction;
 import com.halycon.maze.simulation.entity.state.AttackState;
 import com.halycon.maze.simulation.entity.state.StateChangeTiming;
 

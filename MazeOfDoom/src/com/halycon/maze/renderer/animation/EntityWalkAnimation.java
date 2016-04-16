@@ -1,9 +1,9 @@
 package com.halycon.maze.renderer.animation;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.halycon.maze.core.Direction;
 import com.halycon.maze.core.Vector;
 import com.halycon.maze.renderer.ImageList;
-import com.halycon.maze.simulation.common.Direction;
 import com.halycon.maze.simulation.entity.state.CanBeAnimated;
 
 

@@ -1,6 +1,5 @@
-package com.halycon.maze.simulation.common;
+package com.halycon.maze.core;
 
-import com.halycon.maze.core.Vector;
 
 public enum Direction {
 

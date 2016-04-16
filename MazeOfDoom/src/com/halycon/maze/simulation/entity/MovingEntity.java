@@ -1,7 +1,7 @@
 package com.halycon.maze.simulation.entity;
 
+import com.halycon.maze.core.Direction;
 import com.halycon.maze.core.Vector;
-import com.halycon.maze.simulation.common.Direction;
 
 
 public class MovingEntity {

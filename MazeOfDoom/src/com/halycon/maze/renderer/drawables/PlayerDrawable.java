@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.halycon.maze.business.DefaultConstants;
+import com.halycon.maze.core.Direction;
 import com.halycon.maze.core.Vector;
 import com.halycon.maze.renderer.ImageList;
 import com.halycon.maze.renderer.animation.EntityAnimationHandler;
@@ -12,7 +13,6 @@ import com.halycon.maze.renderer.animation.EntityAttackAnimation;
 import com.halycon.maze.renderer.animation.EntityDeathAnimation;
 import com.halycon.maze.renderer.animation.EntityHurtAnimation;
 import com.halycon.maze.renderer.animation.EntityWalkAnimation;
-import com.halycon.maze.simulation.common.Direction;
 import com.halycon.maze.simulation.entity.Player;
 import com.halycon.maze.simulation.entity.state.AttackState;
 import com.halycon.maze.simulation.entity.state.DamageState;
