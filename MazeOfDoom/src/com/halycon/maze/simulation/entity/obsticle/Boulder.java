@@ -15,6 +15,6 @@ public class Boulder extends Obsticle {
 
 	@Override
 	public void handleCollision(Player player) {
-		this.impulse(player.getDirection().getVector().multiply(0.15f));
+		this.impulse(player.getDirection().getVector().multiply(3.2f));
 	}
 }
