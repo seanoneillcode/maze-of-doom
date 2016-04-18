@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="17" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="tilesetold" tilewidth="16" tileheight="16">
+  <image source="tiles.png" width="160" height="48"/>
+ </tileset>
+ <layer name="ground" width="20" height="17">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC6WUwQ6AIAxDgZMknsb//6uabMnSlIp4aEzW+oQx7KWUTnTcOv3J/MigVKa98BhzVq+uv7zq66pEObvCC86Y8B7fFnns/cxhTHUeyDAXq5lgtvT9RvzMilrwWB55A1iZE3sxzw3IY19Z74z0fhCpec5nzHq0w8OZy/4KbzZTM5/1Tq0R766aYcXCu6IyX3i7/wO1pzzjq7wL8B1MRFAFAAA=
+  </data>
+ </layer>
+ <layer name="walls" width="20" height="17">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC52U4QrAIAiEhdb+jL3/607YAjnOPCf4I7Hrs7RpZqf7cD/c57e+7LU7xDAH40ZymGHOWrP4TmeZyjeBtbJ4dtzX5VOYV6zDp+j+5ct0O1bVMpo6FYN6f2ot8X0zXezd6tyqFuzdHRvqMAY2mxkb6jCGGFNmnM15lssYkUXpbcaY/TmYr95hpvsAYfr6NFAFAAA=
+  </data>
+ </layer>
+ <objectgroup name="objects" width="20" height="17">
+  <object name="link" x="112" y="0" width="16" height="16">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="node" value="house"/>
+   </properties>
+  </object>
+  <object name="enemy" x="208" y="144" width="16" height="16">
+   <properties>
+    <property name="type" value="blob"/>
+   </properties>
+  </object>
+  <object name="pickup" x="240" y="192" width="16" height="16">
+   <properties>
+    <property name="type" value="health"/>
+   </properties>
+  </object>
+  <object name="link" x="96" y="256" width="48" height="16">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="node" value="stairs"/>
+   </properties>
+  </object>
+  <object name="link" x="0" y="112" width="16" height="32">
+   <properties>
+    <property name="direction" value="left"/>
+    <property name="node" value="door"/>
+   </properties>
+  </object>
+  <object name="enemy" x="288" y="160" width="16" height="16">
+   <properties>
+    <property name="type" value="blob"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

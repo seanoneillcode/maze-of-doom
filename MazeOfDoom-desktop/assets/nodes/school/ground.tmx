@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="48" height="48" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16">
+  <image source="tiles.png" width="160" height="128"/>
+ </tileset>
+ <layer name="ground" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt0zEKgDAMQNH2AN7AE7i4eP+z6eJSKBZEYsob3pBOP5DWUkoFAAAAAACAD22X4wcdo/bG3d++R3fO3r90ZOvvzdGdo/2rfvfzoj/r/30S3Tlrf2+f6I4MTqY8F9M=
+  </data>
+ </layer>
+ <layer name="walls" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt0kEKgCAQhWFv4qYCKaJlter+p8rAYBgMJNQk/g8eprN5xBgDAAAAAAAAAAAA5NP59CGHjxUzG97u+VC5W4pZ3d3D92Up3OUN3V//f6nl/k6dsbeW+6egf356f2LYn3L+0p/9+cbqs4mMYjap2V69XftO5JAJQA==
+  </data>
+ </layer>
+ <layer name="cover" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt0jENAAAIwDCc4N8lwQIkHKR99y4CAAAAAAAA+CaHDZp/2PAP3CtBwAC7
+  </data>
+ </layer>
+ <objectgroup name="objects" width="48" height="48"/>
+</map>
