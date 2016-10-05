@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="14" height="17" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16">
+  <image source="../boulder/boulderTiles.png" width="160" height="64"/>
+ </tileset>
+ <layer name="ground" width="14" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy10rEOwCAIBFBwgv//YR1qQi6IXJsOxEFeTlQXEYeyVfqsuJeVBaPBVj4z6E8WM6zhYh/jYt7uGx9mvJkqu2v8hcGzsg7vlrUdp4X7K7OyrGHeb/+zk5t5rAcP
+  </data>
+ </layer>
+ <layer name="walls" width="14" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyNUkEKwDAIE7rt6v9/Ow8NZCHaCTJqbGLqIiJW5VV5Vz7xDdTQg5r2Z/hQTuVyAS7tc/NNmqvh6TT5Hdhf583Nhe+kCcz1OM3cCUz9MWfSXfak+5t2znMozufOYzbYSVP5tXbaI+Pqd7rPePe/u3nZj3r76396X1cDxwsO+wK2
+  </data>
+ </layer>
+ <objectgroup name="objects" width="14" height="17">
+  <object name="obsticle" x="96" y="128" width="16" height="16">
+   <properties>
+    <property name="type" value="boulder"/>
+   </properties>
+  </object>
+  <object name="link" x="80" y="0" width="48" height="16">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="node" value="clearing"/>
+   </properties>
+  </object>
+  <object name="link" x="96" y="256" width="48" height="16">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="node" value="boulderpuzzle"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

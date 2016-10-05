@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="15" height="15" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="ground" tilewidth="16" tileheight="16">
+  <image source="boulderTiles.png" width="160" height="64"/>
+  <tile id="30">
+   <properties>
+    <property name="type" value="edge"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="ground" width="15" height="15">
+  <data encoding="base64" compression="zlib">
+   eJyVkkEKACEMA9VTvfkI//9Gd6FCCIm7HgZFm9qm9lJKPNRce+L2jNL+JQAX8+YeCccFvD8ELammv0o0cbZRb57iv7SbeaHFPtB37mEetKzZuU5eqboaafGc58e5p/EOtcor9Nx5z/8qTC6uSc2Jcfe3/55Zy08FPw==
+  </data>
+ </layer>
+ <objectgroup name="objects" width="15" height="15">
+  <object name="link" x="16" y="0" width="48" height="16">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="node" value="clearing"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="walls" width="15" height="15">
+  <data encoding="base64" compression="zlib">
+   eJx9U0EOgCAMI0E46tGDYOJB//9EIdmSWgtNlsroVkYwhy9Siyy+Y4sFOBkjWIPaDByhL/syF9Aclve+DtQgTuO1RRUzFdAgNspX4XkOajse2Kvk6bVdc9n6ol5Yq3xnfo/xPfDdRL3qGcnbz8tnxbxHEt6oD6DdKUL4v6sZeB72VPOOwHfNPUb7PY9ve/YPqPwLgjwG7A==
+  </data>
+ </layer>
+</map>

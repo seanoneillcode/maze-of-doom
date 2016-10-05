@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="18" height="14" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="messing" tilewidth="16" tileheight="16">
+  <image source="castlemessing.png" width="128" height="128"/>
+ </tileset>
+ <layer name="ground" width="18" height="14">
+  <data encoding="base64" compression="zlib">
+   eJwzY2BgMBuEWBUJW+Phk2IONrPQzcFlLjY9yNiAgLnEmoPLPbjMIjU8cckNBnPIiWds8sSGMaH4opY5MGxFZJgQMocSDAB8Ey7g
+  </data>
+ </layer>
+ <layer name="walls" width="18" height="14">
+  <data encoding="base64" compression="zlib">
+   eJzFk+EKgCAMhO81kgqS8Ff1J+j9Hy1HDsY0hxV0cCBzfIOdApcO4b/VRw/Ke6FGHiucuWFmUHMlt5Uj+51gveFwjbRET+nso9eKN8XxqcbiuwBbksP9tDPOBsizKuVT4li7cciz7x5wLH3Noaw4C+A+p0kDFIdl/VM5T78D0glUjQ2I
+  </data>
+ </layer>
+ <objectgroup name="objects" width="18" height="14">
+  <object name="link" x="48" y="192" width="16" height="16">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="node" value="door"/>
+   </properties>
+  </object>
+  <object name="enemy" x="208" y="160" width="16" height="16">
+   <properties>
+    <property name="type" value="blob"/>
+   </properties>
+  </object>
+  <object name="enemy" x="224" y="192" width="16" height="16">
+   <properties>
+    <property name="type" value="blob"/>
+   </properties>
+  </object>
+  <object name="enemy" x="240" y="176" width="16" height="16">
+   <properties>
+    <property name="type" value="blob"/>
+   </properties>
+  </object>
+  <object name="enemy" x="256" y="80" width="16" height="16">
+   <properties>
+    <property name="type" value="blob"/>
+   </properties>
+  </object>
+  <object name="obsticle" x="224" y="80" width="16" height="16">
+   <properties>
+    <property name="type" value="boulder"/>
+   </properties>
+  </object>
+  <object name="mechanism" x="48" y="128" width="16" height="16">
+   <properties>
+    <property name="active" value="true"/>
+    <property name="id" value="1"/>
+    <property name="type" value="door"/>
+   </properties>
+  </object>
+  <object name="mechanism" x="96" y="160" width="16" height="16">
+   <properties>
+    <property name="active" value="false"/>
+    <property name="id" value="0"/>
+    <property name="pairIds" value="1"/>
+    <property name="type" value="plate"/>
+   </properties>
+  </object>
+  <object name="link" x="160" y="64" width="16" height="16">
+   <properties>
+    <property name="direction" value="right"/>
+    <property name="node" value="castlelevel02"/>
+   </properties>
+  </object>
+  <object name="mechanism" x="48" y="80" width="16" height="16">
+   <properties>
+    <property name="active" value="false"/>
+    <property name="id" value="2"/>
+    <property name="pairIds" value="1"/>
+    <property name="type" value="active_plate"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="cover" width="18" height="14">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjBQAAAPwAAE=
+  </data>
+ </layer>
+</map>
