@@ -4,8 +4,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 public class Main {
 	public static void main(String[] args) {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
-		cfg.title = "MazeOfDoom";
-		cfg.useGL30 = true;
+		cfg.title = "Maze Of Doom";
 		cfg.width = 1024;
 		cfg.height = 768;
 		cfg.fullscreen = false;

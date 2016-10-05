@@ -28,25 +28,25 @@ public class Level {
 	private List<Pickup> activePickups;
 	private List<Obsticle> activeObsticles;
 	private List<Mechanism> activeMechanisms;
-	private List<Fall> activeFalls;	
+	private List<Fall> activeFalls;
 	private boolean loadNode;
 	private Event loadMap;
 	private Node newNode;
 	private Link linkTo;
 	private List<DialogEntity> activeDialogEntitys;
 	private Dialog activeDialog;
-	
+
 	public Level() {
 		nodes = new HashMap<String, Node>();
 		nodes.put("house", NodeLoader.load("nodes/house/house.tmx", "house"));
-//		nodes.put("clearing", NodeLoader.load("nodes/clearing/clearing.tmx", "clearing"));
+		nodes.put("clearing", NodeLoader.load("nodes/clearing/clearing.tmx", "clearing"));
 		nodes.put("boulder", NodeLoader.load("nodes/boulder/boulder.tmx", "boulder"));
 		nodes.put("stairs", NodeLoader.load("nodes/stairs/stairs.tmx", "stairs"));
 		nodes.put("door", NodeLoader.load("nodes/door/door.tmx", "door"));
 		nodes.put("boulderpuzzle", NodeLoader.load("nodes/boulder/boulderpuzzle01.tmx", "boulderpuzzle"));
 		nodes.put("castlelevel01", NodeLoader.load("nodes/door/castlelevel01.tmx", "castlelevel01"));
 		nodes.put("castlelevel02", NodeLoader.load("nodes/door/castlelevel02.tmx", "castlelevel02"));
-		nodes.put("clearing", NodeLoader.load("nodes/house-front/front.tmx", "clearing"));
+		// nodes.put("clearing", NodeLoader.load("nodes/house-front/front.tmx", "clearing"));
 		activeNode = nodes.get("house");
 		activeEnemies = activeNode.getEnemies();
 		activePickups = activeNode.getPickups();
@@ -58,43 +58,43 @@ public class Level {
 		loadMap = new Event(DefaultConstants.MAP_LOAD_DURATION);
 		activeDialog = null;
 	}
-	
+
 	public List<DialogEntity> getDialogEntitys() {
 		return activeDialogEntitys;
 	}
-	
+
 	public Dialog getActiveDialog() {
 		return activeDialog;
 	}
-	
+
 	public List<Mechanism> getMechanisms() {
 		return activeMechanisms;
 	}
-	
+
 	public List<Obsticle> getObsticles() {
 		return activeObsticles;
 	}
-	
+
 	public Node getActiveNode() {
 		return activeNode;
 	}
-	
+
 	public TiledMap getMap() {
 		return activeNode.getMap();
 	}
-	
+
 	public List<Enemy> getEnemies() {
 		return activeEnemies;
 	}
-	
+
 	public List<Pickup> getPickups() {
 		return activePickups;
 	}
-	
+
 	public boolean doesMapNeedLoading() {
 		return loadNode;
 	}
-	
+
 	private Link getLinkWithNodeName(String name, List<Link> links) {
 		for (Link link : links) {
 			if (link.getNodeName().equals(name)) {
@@ -103,7 +103,7 @@ public class Level {
 		}
 		return null;
 	}
-	
+
 	public void update(Player player, float delta) {
 		if (activeDialog != null) {
 			activeDialog.update(delta);
@@ -129,7 +129,7 @@ public class Level {
 			}
 		}
 	}
-	
+
 	public void use(Player player) {
 		if (activeDialog != null) {
 			if (activeDialog.isDone()) {
@@ -140,11 +140,11 @@ public class Level {
 			}
 		}
 	}
-	
+
 	private void updateDialogEntities(Player player, float delta) {
 		if (activeDialogEntitys.size() > 0) {
 			for (DialogEntity dialogEntity : activeDialogEntitys) {
-				
+
 				if (CollisionHandler.isColliding(player, dialogEntity, delta)) {
 					CollisionHandler.resolveCollision(player, dialogEntity, delta);
 				}
@@ -154,12 +154,12 @@ public class Level {
 			}
 		}
 	}
-	
+
 	private void updateFalls(Player player, float delta) {
 		if (activeFalls.size() > 0) {
 			for (Fall fall : activeFalls) {
 				if (CollisionHandler.isColliding(fall, player.getEntity())) {
-					
+
 					newNode = activeNode;
 					linkTo = getLinkWithNodeName(fall.getLink(), newNode.getLinks());
 					player.damage(1);
@@ -169,12 +169,12 @@ public class Level {
 			}
 		}
 	}
-	
+
 	private void updateMechanisms(Player player, float delta) {
 		if (activeMechanisms.size() > 0) {
 			for (Mechanism mechanism : activeMechanisms) {
-				
-				
+
+
 				if (CollisionHandler.isColliding(mechanism, player.getEntity())) {
 					mechanism.handleCollision(player, delta);
 				}
@@ -187,19 +187,19 @@ public class Level {
 			}
 		}
 	}
-	
+
 	public boolean isLoading() {
 		return loadMap.isStarted() && !loadMap.isDone();
 	}
-	
+
 	public boolean isPaused() {
 		return activeDialog != null;
 	}
-	
+
 	public float getLoadPercentage() {
 		return loadMap.percentDone();
 	}
-	
+
 	private void updateEnemies(Player player, float delta) {
 		if (activeEnemies.size() > 0) {
 			for (Enemy enemy : activeEnemies) {
@@ -243,7 +243,7 @@ public class Level {
 			}
 		}
 	}
-	
+
 	private void updatePickups(Player player, float delta) {
 		if (activePickups.size() > 0) {
 			for (Pickup pickup : activePickups) {
@@ -256,7 +256,7 @@ public class Level {
 			}
 		}
 	}
-	
+
 	private void updateObsticles(Player player, float delta) {
 		if (activeObsticles.size() > 0) {
 			for (Obsticle obsticle : activeObsticles) {
@@ -274,7 +274,7 @@ public class Level {
 			}
 		}
 	}
-	
+
 	private void updateLinks(Player player, List<Link> links) {
 		for (Link link : links) {
 			if (CollisionHandler.isColliding(link.getEntity(), player.getEntity())) {
@@ -285,7 +285,7 @@ public class Level {
 			}
 		}
 	}
-	
+
 	private void actuallyLoadTheNextMap(Player player) {
 		Node oldNode = activeNode;
 		Link linkFrom = getLinkWithNodeName(newNode.getName(), oldNode.getLinks());
