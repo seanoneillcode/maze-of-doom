@@ -2,10 +2,15 @@ package simulation;
 
 public class Event {
 
+	private enum State {
+		READY,
+		STARTED,
+		DONE
+	}
+
 	private float timer;
 	private float length;
-	private boolean done;
-	private boolean started;
+	private State state;
 	
 	public Event(float length) {
 		this.length = length;
@@ -13,22 +18,22 @@ public class Event {
 	}
 	
 	public boolean isStarted() {
-		return started;
+		return state == State.STARTED;
 	}
 	
 	public void start() {
-		started = true;
+		state = State.STARTED;
 	}
 	
 	public boolean isDone() {
-		return done;
+		return state == State.DONE;
 	}
 	
 	public void update(float delta) {
-		if (started) {
+		if (state == State.STARTED) {
 			timer += delta;
 			if (timer >= length) {
-				done = true;
+				state = State.DONE;
 			}			
 		}
 	}
@@ -38,8 +43,7 @@ public class Event {
 	}
 	
 	public void reset() {
-		done = false;
-		started = false;
+		state = State.READY;
 		timer = 0;
 	}
 }

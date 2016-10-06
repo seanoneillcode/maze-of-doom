@@ -21,11 +21,7 @@ public class Simulation {
 		postDeath = new Event(DefaultConstants.DEATH_DURATION);
 		simulationDone = false;
 	}
-	
-	public Event getPlayerDeathEvent() {
-		return postDeath;
-	}
-		
+			
 	public boolean isDone() {
 		return simulationDone;
 	}
