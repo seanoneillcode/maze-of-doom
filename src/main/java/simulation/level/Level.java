@@ -12,6 +12,8 @@ import simulation.dialog.Dialog;
 import simulation.entity.CollisionHandler;
 import simulation.entity.DialogEntity;
 import simulation.entity.Enemy;
+import simulation.entity.Entity;
+import simulation.entity.EntityType;
 import simulation.entity.Fall;
 import simulation.entity.Pickup;
 import simulation.entity.Player;
@@ -25,10 +27,9 @@ public class Level {
 	private Map<String, Node> nodes;
 	private Node activeNode;
 	private List<Enemy> activeEnemies;
-	private List<Pickup> activePickups;
 	private List<Obsticle> activeObsticles;
 	private List<Mechanism> activeMechanisms;
-	private List<Fall> activeFalls;
+	private List<Entity> activeEntities;
 	private boolean loadNode;
 	private Event loadMap;
 	private Node newNode;
@@ -46,13 +47,11 @@ public class Level {
 		nodes.put("boulderpuzzle", NodeLoader.load("nodes/boulder/boulderpuzzle01.tmx", "boulderpuzzle"));
 		nodes.put("castlelevel01", NodeLoader.load("nodes/door/castlelevel01.tmx", "castlelevel01"));
 		nodes.put("castlelevel02", NodeLoader.load("nodes/door/castlelevel02.tmx", "castlelevel02"));
-		// nodes.put("clearing", NodeLoader.load("nodes/house-front/front.tmx", "clearing"));
 		activeNode = nodes.get("house");
 		activeEnemies = activeNode.getEnemies();
-		activePickups = activeNode.getPickups();
 		activeObsticles = activeNode.getObsticles();
 		activeMechanisms = activeNode.getMechanisms();
-		activeFalls = activeNode.getFalls();
+		activeEntities = activeNode.getEntities();
 		activeDialogEntitys = activeNode.getDialogEntitys();
 		loadNode = true;
 		loadMap = new Event(DefaultConstants.MAP_LOAD_DURATION);
@@ -87,8 +86,8 @@ public class Level {
 		return activeEnemies;
 	}
 
-	public List<Pickup> getPickups() {
-		return activePickups;
+	public List<Entity> getEntities() {
+		return activeEntities;
 	}
 
 	public boolean doesMapNeedLoading() {
@@ -120,11 +119,10 @@ public class Level {
 			}
 			if (!loadMap.isStarted()) {
 				updateEnemies(player, delta);
-				updatePickups(player, delta);
 				updateLinks(player, activeNode.getLinks());
 				updateObsticles(player, delta);
 				updateMechanisms(player, delta);
-				updateFalls(player, delta);
+				updateEntities(player, delta);
 				updateDialogEntities(player, delta);
 			}
 		}
@@ -155,16 +153,25 @@ public class Level {
 		}
 	}
 
-	private void updateFalls(Player player, float delta) {
-		if (activeFalls.size() > 0) {
-			for (Fall fall : activeFalls) {
-				if (CollisionHandler.isColliding(fall, player.getEntity())) {
-
-					newNode = activeNode;
-					linkTo = getLinkWithNodeName(fall.getLink(), newNode.getLinks());
-					player.damage(1);
-					loadMap.start();
-					break;
+	private void updateEntities(Player player, float delta) {
+		if (activeEntities.size() > 0) {
+			for (Entity entity : activeEntities) {
+				if (entity.getType() == EntityType.FALL) {
+					if (CollisionHandler.isColliding(entity, player.getEntity())) {
+						newNode = activeNode;
+						linkTo = getLinkWithNodeName(((Fall)entity).getLink(), newNode.getLinks());
+						player.damage(1);
+						loadMap.start();
+						break;
+					}
+				}
+				if (entity.getType() == EntityType.PICKUP) {
+					if (entity.getState() == EntityState.DEAD) {
+						continue;
+					}
+					if (CollisionHandler.isColliding(player.getEntity(), entity)) {
+						((Pickup)entity).getPickedUp(player);
+					}
 				}
 			}
 		}
@@ -229,29 +236,18 @@ public class Level {
 						}
 					}
 				}
-				if (activeFalls.size() > 0) {
-					for (Fall fall : activeFalls) {
-						if (CollisionHandler.isColliding(enemy, fall, delta)) {
-							CollisionHandler.resolveCollision(enemy, fall, delta);
-							if (CollisionHandler.isColliding(enemy, fall, delta)) {
-								enemy.damage(2);
-								enemy.impulse(Vector.getUnitVector(player.getPosition(), enemy.getPosition()).multiply(3));
+				if (activeEntities.size() > 0) {
+					for (Entity entity : activeEntities) {
+						if (entity.getType() == EntityType.FALL) {
+							if (CollisionHandler.isColliding(enemy, entity, delta)) {
+								CollisionHandler.resolveCollision(enemy, entity, delta);
+								if (CollisionHandler.isColliding(enemy, entity, delta)) {
+									enemy.damage(2);
+									enemy.impulse(Vector.getUnitVector(player.getPosition(), enemy.getPosition()).multiply(3));
+								}
 							}
 						}
 					}
-				}
-			}
-		}
-	}
-
-	private void updatePickups(Player player, float delta) {
-		if (activePickups.size() > 0) {
-			for (Pickup pickup : activePickups) {
-				if (pickup.getState() == EntityState.DEAD) {
-					continue;
-				}
-				if (CollisionHandler.isColliding(player.getEntity(), pickup)) {
-					pickup.getPickedUp(player);
 				}
 			}
 		}
@@ -296,10 +292,9 @@ public class Level {
 		player.getEntity().pos = new Vector(linkTo.getEntity().pos);
 		activeNode = newNode;
 		activeEnemies = activeNode.getEnemies();
-		activePickups = activeNode.getPickups();
 		activeObsticles = activeNode.getObsticles();
 		activeMechanisms = activeNode.getMechanisms();
-		activeFalls = activeNode.getFalls();
+		activeEntities = activeNode.getEntities();
 		activeDialogEntitys = activeNode.getDialogEntitys();
 		activeDialog = null;
 		player.setMovement(new Vector());

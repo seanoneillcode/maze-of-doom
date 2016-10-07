@@ -14,7 +14,7 @@ public class PickupDrawable implements Drawable {
 	
 	public PickupDrawable(Pickup pickup) {
 		this.pickup = pickup;
-		PickupDrawConfig config = PickupDrawConfig.getPickupDrawConfig(pickup.getType());
+		PickupDrawConfig config = PickupDrawConfig.getPickupDrawConfig(pickup.getPickupType());
 		sprite = new EntitySprite(config.getImage(), config.getPickupType().getSize(), config.getOffset());
 	}
 	

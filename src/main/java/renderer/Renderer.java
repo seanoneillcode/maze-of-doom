@@ -28,6 +28,7 @@ import simulation.Simulation;
 import simulation.dialog.Dialog;
 import simulation.entity.Enemy;
 import simulation.entity.Entity;
+import simulation.entity.EntityType;
 import simulation.entity.Pickup;
 import simulation.entity.Player;
 import simulation.entity.mechanism.Mechanism;
@@ -73,7 +74,7 @@ public class Renderer {
 		drawables = new ArrayList<Drawable>();
 		drawables.add(new PlayerDrawable(simulation.getPlayer()));
 		drawables = loadEnemies(level.getEnemies(), drawables);
-		drawables = loadPickups(level.getPickups(), drawables);
+		drawables = loadEntities(level.getEntities(), drawables);
 		drawables = loadObsticles(level.getObsticles(), drawables);
 		drawables = loadMechanisms(level.getMechanisms(), drawables);
 	}
@@ -92,9 +93,11 @@ public class Renderer {
 		return drawables;
 	}
 	
-	private List<Drawable> loadPickups(List<Pickup> pickups, List<Drawable> drawables) {
-		for (Pickup pickup : pickups) {
-			drawables.add(new PickupDrawable(pickup));
+	private List<Drawable> loadEntities(List<Entity> entities, List<Drawable> drawables) {
+		for (Entity entity : entities) {
+			if (entity.getType() == EntityType.PICKUP) {
+				drawables.add(new PickupDrawable((Pickup)entity));
+			}
 		}
 		return drawables;
 	}

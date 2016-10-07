@@ -9,6 +9,8 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import core.Vector;
 import simulation.entity.DialogEntity;
 import simulation.entity.Enemy;
+import simulation.entity.Entity;
+import simulation.entity.EntityType;
 import simulation.entity.Fall;
 import simulation.entity.Pickup;
 import simulation.entity.mechanism.Mechanism;
@@ -25,12 +27,11 @@ public class Node {
 	List<Link> links;
 	String name;
 	List<Enemy> enemies;
-	List<Pickup> pickups;
 	List<Obsticle> obsticles;
 	TiledMapTileLayer coverLayer;
 	List<Mechanism> mechanisms;
-	List<Fall> falls;
 	List<DialogEntity> dialogEntitys;
+	List<Entity> entities = new ArrayList<Entity>();
 	
 	public void setDialogEntitys(List<DialogEntity> dialogEntitys) {
 		this.dialogEntitys = dialogEntitys;
@@ -40,18 +41,6 @@ public class Node {
 		List<DialogEntity> copy = new ArrayList<DialogEntity>();
 		for (DialogEntity dialogEntity : dialogEntitys) {
 			copy.add(new DialogEntity(dialogEntity));
-		}
-		return copy;
-	}
-	
-	public void setFalls(List<Fall> falls) {
-		this.falls = falls;
-	}
-	
-	public List<Fall> getFalls() {
-		List<Fall> copy = new ArrayList<Fall>();
-		for (Fall fall : falls) {
-			copy.add(new Fall(fall));
 		}
 		return copy;
 	}
@@ -88,14 +77,6 @@ public class Node {
 		return copy;
 	}
 	
-	public List<Pickup> getPickups() {
-		List<Pickup> copy = new ArrayList<Pickup>();
-		for (Pickup pickup : pickups) {
-			copy.add(new Pickup(pickup));
-		}
-		return copy;
-	}
-	
 	public List<Enemy> getEnemies() {
 		List<Enemy> copy = new ArrayList<Enemy>();
 		for (Enemy enemy : enemies) {
@@ -103,9 +84,22 @@ public class Node {
 		}
 		return copy;
 	}
-	
-	public void setPickups(List<Pickup> pickups) {
-		this.pickups = pickups;
+
+	public void addEntities(List<Entity> entities) {
+		this.entities.addAll(entities);
+	}
+
+	public List<Entity> getEntities() {
+		List<Entity> copy = new ArrayList<Entity>();
+		for (Entity entity : entities) {
+			if (entity.getType() == EntityType.FALL) {
+				copy.add(new Fall((Fall) entity));
+			}
+			if (entity.getType() == EntityType.PICKUP) {
+				copy.add(new Pickup((Pickup) entity));
+			}
+		}
+		return copy;
 	}
 	
 	public void setEnemies(List<Enemy> enemies) {

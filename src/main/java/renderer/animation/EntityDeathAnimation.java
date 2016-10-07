@@ -8,11 +8,11 @@ import renderer.ImageList;
 import simulation.entity.state.CanBeAnimated;
 
 public class EntityDeathAnimation implements Animation {
+
 	private float timer = 0f;
 	private static final float FRAME =  0.2f;
 	private Vector position;
 	ImageList imageList;
-	Direction direction;
 	private int index = 0;
 	
 	public EntityDeathAnimation(ImageList image) {

@@ -25,6 +25,7 @@ import simulation.dialog.Dialog;
 import simulation.entity.DialogEntity;
 import simulation.entity.Enemy;
 import simulation.entity.EnemyType;
+import simulation.entity.Entity;
 import simulation.entity.Fall;
 import simulation.entity.Pickup;
 import simulation.entity.PickupType;
@@ -73,12 +74,12 @@ public class NodeLoader {
 		node.setPosition(new Vector());
 		node.setName(name);
 		node.setEnemies(getEnemies(map));
-		node.setPickups(getPickups(map));
+		node.addEntities(getPickups(map));
 		node.setObsticles(getObsticles(map));
 		node.setCoverLayer(getCover(map));
 		node.setMechanisms(getMechanisms(map));
-		node.setFalls(getFalls(map));
 		node.setDialogEntitys(getDialogEntitys(map));
+		node.addEntities(getFalls(map));
 		return node;
 	}
 	
@@ -106,8 +107,8 @@ public class NodeLoader {
 		return dialogEntitys;
 	}
 	
-	private static List<Fall> getFalls(TiledMap map) {
-		List<Fall> obsticles = new ArrayList<Fall>();
+	private static List<Entity> getFalls(TiledMap map) {
+		List<Entity> obsticles = new ArrayList<Entity>();
 		
 		MapLayer layer = map.getLayers().get(OBJECT_LAYER);
 		MapObjects mapObjects = layer.getObjects();
@@ -197,8 +198,8 @@ public class NodeLoader {
 		return obsticles;
 	}
 	
-	private static List<Pickup> getPickups(TiledMap map) {
-		List<Pickup> pickups = new ArrayList<Pickup>();
+	private static List<Entity> getPickups(TiledMap map) {
+		List<Entity> pickups = new ArrayList<Entity>();
 		
 		MapLayer layer = map.getLayers().get(OBJECT_LAYER);
 		MapObjects mapObjects = layer.getObjects();

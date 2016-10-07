@@ -25,7 +25,7 @@ public abstract class Mechanism extends Entity implements MeschanismMessageClien
 	
 	public Mechanism(Mechanism mechanism) {
 		super(mechanism.getPosition(), mechanism.getSize());
-		this.type = mechanism.getType();
+		this.type = mechanism.getMechanismType();
 		setActive(mechanism.isActive());
 		this.id = mechanism.getId();
 		this.pairIds = mechanism.getPairIds();
@@ -40,7 +40,7 @@ public abstract class Mechanism extends Entity implements MeschanismMessageClien
 		return id;
 	}
 	
-	public MechanismType getType() {
+	public MechanismType getMechanismType() {
 		return type;
 	}
 

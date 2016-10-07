@@ -35,11 +35,9 @@ public class CollisionHandler {
 		return colliding;
 	}
 
-	public static void resolveCollision(MovingEntity movingEntity,
-			Entity entity, float delta) {
+	public static void resolveCollision(MovingEntity movingEntity, Entity entity, float delta) {
 
 		Vector move = movingEntity.getMovement();
-		// Vector physics = movingEntity.getPhysics();
 
 		Vector oldPos = new Vector(movingEntity.getPosition());
 		float nx, ny, nsx, nsy, ox, oy, osx, osy;
@@ -53,10 +51,10 @@ public class CollisionHandler {
 		osy = oy + movingEntity.getSize().y;
 
 		Vector resultMove = new Vector(1, 1);
-		resultMove = resolveCollision(nx, ny, ox, oy, entity, delta, resultMove);
-		resultMove = resolveCollision(nsx, ny, osx, oy, entity, delta, resultMove);
-		resultMove = resolveCollision(nsx, nsy, osx, osy, entity, delta, resultMove);
-		resultMove = resolveCollision(nx, nsy, ox, osy, entity, delta, resultMove);
+		resultMove = resolveCollision(nx, ny, ox, oy, entity,resultMove);
+		resultMove = resolveCollision(nsx, ny, osx, oy, entity, resultMove);
+		resultMove = resolveCollision(nsx, nsy, osx, osy, entity, resultMove);
+		resultMove = resolveCollision(nx, nsy, ox, osy, entity, resultMove);
 
 		move.x = move.x * resultMove.x;
 		move.y = move.y * resultMove.y;
@@ -65,7 +63,7 @@ public class CollisionHandler {
 		movingEntity.applyFriction();
 	}
 
-	public static Vector resolveCollision(float nx, float ny, float ox, float oy, Entity entity, float delta, Vector move) {
+	public static Vector resolveCollision(float nx, float ny, float ox, float oy, Entity entity, Vector move) {
 		boolean b = pointCollidesWithEntity(nx, oy, entity);
 		boolean c = pointCollidesWithEntity(nx, ny, entity);
 		boolean d = pointCollidesWithEntity(ox, ny, entity);
@@ -85,8 +83,7 @@ public class CollisionHandler {
 		return move;
 	}
 
-	private static boolean pointCollidesWithEntity(float x, float y,
-			Entity entity) {
+	private static boolean pointCollidesWithEntity(float x, float y, Entity entity) {
 		Vector ep = entity.getPosition();
 		Vector es = entity.getSize();
 		if (x > ep.x && x < (ep.x + es.x)) {
@@ -97,8 +94,7 @@ public class CollisionHandler {
 		return false;
 	}
 
-	public static void resolveCollision(MovingEntity movingEntity, Node node,
-			float delta) {
+	public static void resolveCollision(MovingEntity movingEntity, Node node, float delta) {
 		float newx, newy, sizex, sizey, oldx, oldy, oldsizex, oldsizey;
 		Vector move = movingEntity.getMovement();
 		Vector physics = movingEntity.getPhysics();
@@ -143,11 +139,11 @@ public class CollisionHandler {
 				oldsizey, node);
 
 		if (resultMove.x != 1) {
-			physics.x = 0;//-physics.x;
+			physics.x = 0;
 			movingEntity.applyFriction();
 		}
 		if (resultMove.y != 1) {
-			physics.y = 0;//-physics.y;
+			physics.y = 0;
 			movingEntity.applyFriction();
 		}
 		movingEntity.setPhysics(physics);

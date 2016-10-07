@@ -10,7 +10,7 @@ public class MechanismFactory {
 	
 	public static Mechanism getMechanism(Mechanism mechanism) {
 		Mechanism instance = null;
-		switch (mechanism.getType()) {
+		switch (mechanism.getMechanismType()) {
 		case DOOR:
 			instance = new Door(mechanism);
 			break;

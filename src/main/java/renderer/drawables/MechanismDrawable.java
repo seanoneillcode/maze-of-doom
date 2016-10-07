@@ -13,7 +13,7 @@ public class MechanismDrawable implements Drawable {
 	
 	public MechanismDrawable(Mechanism mechanism) {
 		this.mechanism = mechanism;
-		image = new ImageList(mechanism.getType().getImage(), mechanism.getSize(), 2, new Vector());
+		image = new ImageList(mechanism.getMechanismType().getImage(), mechanism.getSize(), 2, new Vector());
 	}
 	
 	@Override
@@ -22,7 +22,7 @@ public class MechanismDrawable implements Drawable {
 	}
 
 	public float getZ() {
-		if (!mechanism.getType().getCovers()) {
+		if (!mechanism.getMechanismType().getCovers()) {
 			return 999;
 		}
 		return mechanism.getPosition().y;
