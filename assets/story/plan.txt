@@ -1,0 +1,95 @@
+Scene 1
+- action
+    run, survive, escape
+
+- introduce main person
+    name
+- introduce some context
+    what's going on
+    where are we
+- add bad person or enemy
+    could be a person representing and idea (death, time, revenge, !greed!)
+- give the player a goal that conflicts with bad person
+
+Scene 2
+- add lots of conflict
+- add more context
+    why
+- add something of value to character that worth conflict ( the loss of the country, knights duty, self preservation )
+- gain special weapon or ability
+
+Scene 3
+- boss fight conflict
+- use actions to show positive idea,
+    not giving up in the face of impossible
+    self sacrifice for the greater good
+    forgiveness
+    people are good on the inside
+
+
+
+ACT 1
+scene 1 : burning house and town
+scene 2 : forest
+scene 3 : plains battle
+
+enter name:
+bad dream
+you smell smoke and awake
+action - inside house - place is on fire
+push things to get outside
+once out side fight monsters
+shadow man is seen
+fight unsuccessfully - pass out (inner conflict, didn't win fight)
+wake up in forest
+make friend - pulled you out of battle (conflict with friend) - bit of a rogue
+goal is to tell lord about evil shadow
+travel over hills and fight to get to small castle
+ rivers
+ cliffs
+ forest
+pitch and boss battle on plains to get into castle under siege
+
+ACT 2 - SMALL CASTLE
+scene 1 : castle
+scene 2 : mountain travel
+scene 3 : witch temple
+scene 4 : inner mind
+
+talk to lord - add context - shadow man is an evil ex-lord
+turns out friend is a thief - vouch for rogue friend (overcome inner conflict and show value, friendship) (adds new conflict, authority)
+talk to npcs - more context
+  wizard is evil and greedy for land and wealth (correct trait, false reason)
+  place is a generally peaceful medieval kingdom
+castle is attacked!
+shadow man, is invincible
+castle is abandoned
+lord is wounded - will head for capitol to speak to king
+get goal of killing shadow lord
+
+travel to high mountain to meet good witch
+lots of fighting and travel
+with lives in temple with other witches
+goal of bad person is actually to kill player!
+gain spell of making shadows real
+boss battle with inner self to gain spell ( fight in mindscape )
+
+ACT 3
+scene 1: ice land
+scene 2: dark castle
+scene 3: volcano final boss fight
+
+witch spell sends player to :
+ice land
+then travel to
+dark castle
+volcano hill
+why does shadow man want to kill player
+use spell to kill shadow man
+
+
+
+
+
+
+
