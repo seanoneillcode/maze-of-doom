@@ -59,6 +59,10 @@ public class Level {
 		activeDialog = null;
 	}
 
+	public boolean hasWeather() {
+		return activeNode.hasWeather();
+	}
+
 	public List<DialogEntity> getDialogEntitys() {
 		return activeDialogEntitys;
 	}

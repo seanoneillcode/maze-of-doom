@@ -32,6 +32,7 @@ public class Node {
 	List<Mechanism> mechanisms;
 	List<DialogEntity> dialogEntitys;
 	List<Entity> entities = new ArrayList<Entity>();
+	boolean hasWeather = false;
 	
 	public void setDialogEntitys(List<DialogEntity> dialogEntitys) {
 		this.dialogEntitys = dialogEntitys;
@@ -153,5 +154,12 @@ public class Node {
 	public List<Link> getLinks() {
 		return links;
 	}
-	
+
+	public boolean hasWeather() {
+		return hasWeather;
+	}
+
+	public void setWeather(boolean hasWeather) {
+		this.hasWeather = hasWeather;
+	}
 }

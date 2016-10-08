@@ -51,7 +51,10 @@ public class Renderer {
 	EntitySprite blankScreen;
 	List<Drawable> drawables;
 	DialogDrawable dialogDrawable;
-	
+	EntitySprite weatherLayer;
+	Vector weatherOffest;
+	boolean hasWeather;
+
 	public Renderer(Simulation simulation) {
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
@@ -63,6 +66,8 @@ public class Renderer {
 		blankScreen = new EntitySprite("ui/blankscreen.png", new Vector(224, 160));
 		mapIsLoaded = false;
 		dialogDrawable = new DialogDrawable();
+		weatherLayer = new EntitySprite("characters/smoke.png", new Vector(32, 32));
+		weatherOffest = new Vector(0,0);
 	}
 
 	public void loadMap(Simulation simulation) {
@@ -77,6 +82,7 @@ public class Renderer {
 		drawables = loadEntities(level.getEntities(), drawables);
 		drawables = loadObsticles(level.getObsticles(), drawables);
 		drawables = loadMechanisms(level.getMechanisms(), drawables);
+		hasWeather = simulation.getLevel().hasWeather();
 	}
 	
 	private List<Drawable> loadObsticles(List<Obsticle> obsticles, List<Drawable> drawables) {
@@ -149,7 +155,9 @@ public class Renderer {
 				mapRenderer.renderTileLayer(coverLayer);
 				spriteBatch.end();
 			}
-			
+			if (hasWeather) {
+				drawWeather(spriteBatch, delta);
+			}
 			if (DefaultConstants.DEBUG_ENABLED) {
 				drawDebug(player, simulation.getLevel().getEnemies(), simulation.getLevel().getObsticles());
 			}
@@ -170,6 +178,28 @@ public class Renderer {
 		blankScreen.setAlpha(percent / 100.0f);
 		Vector position = new Vector(camera.position.x - 112, camera.position.y - 80);
 		blankScreen.draw(position, spriteBatch);
+	}
+
+	private void drawWeather(Batch spriteBatch, float delta) {
+		Vector position = new Vector(camera.position.x - (DefaultConstants.SCREEN_SIZE.x * 0.5f), camera.position.y - (DefaultConstants.SCREEN_SIZE.y * 0.50f));
+		position = position.add(weatherOffest);
+
+		for (int index = 0; index < 6; index++) {
+			for (int otherIndex = 0; otherIndex < 8; otherIndex++) {
+				weatherLayer.draw(position, spriteBatch);
+				position.x += 32;
+			}
+			position.x -= 256;
+			position.y += 32;
+		}
+		weatherOffest.x = weatherOffest.x - (15.0f * delta);
+		weatherOffest.y = weatherOffest.y - (7.0f * delta);
+		if (weatherOffest.x < -32) {
+			weatherOffest.x = 0;
+		}
+		if (weatherOffest.y < -32) {
+			weatherOffest.y = 0;
+		}
 	}
 	
 	private void drawPlayerHealth(Batch spriteBatch, Player player) {

@@ -55,7 +55,8 @@ public class NodeLoader {
 	private static final String FALL_TYPE = "fall";
 	private static final String DIALOG_TYPE = "dialog";
 	private static final String TEXT_KEY = "text";
-	
+	private static final String WEATHER_KEY = "weather";
+
 	private static final String ID_SPLIT_REGEX = ",";
 	
 	
@@ -80,9 +81,14 @@ public class NodeLoader {
 		node.setMechanisms(getMechanisms(map));
 		node.setDialogEntitys(getDialogEntitys(map));
 		node.addEntities(getFalls(map));
+		node.setWeather(getHasWeather(map));
 		return node;
 	}
-	
+
+	private static boolean getHasWeather(TiledMap map) {
+		return map.getProperties().containsKey(WEATHER_KEY);
+	}
+
 	private static List<DialogEntity> getDialogEntitys(TiledMap map) {
 		List<DialogEntity> dialogEntitys = new ArrayList<DialogEntity>();
 		
