@@ -177,6 +177,10 @@ public class Level {
 					if (CollisionHandler.isColliding(player.getEntity(), entity)) {
 						((Pickup)entity).getPickedUp(player);
 					}
+					if (CollisionHandler.isColliding(player.getUseEntity(), entity)) {
+						((Pickup)entity).getPickedUp(player);
+						activeDialog = new Dialog("picked up " + ((Pickup)entity).getPickupType().name().toLowerCase());
+					}
 				}
 			}
 		}

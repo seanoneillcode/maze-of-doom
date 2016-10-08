@@ -217,11 +217,12 @@ public class NodeLoader {
 			if (mapObject.getName().equals(PICKUP_NAME)) {
 				MapProperties properties = mapObject.getProperties();
 				String type = (String)properties.get(TYPE_KEY);
+				boolean isVisible = mapObject.isVisible();
 				PickupType pickupType = PickupType.valueOf(type.toUpperCase());
 				RectangleMapObject rectangleObject = (RectangleMapObject)mapObject;
 				Rectangle rectangle = rectangleObject.getRectangle();
 				Vector position = new Vector(rectangle.x, rectangle.y);
-				pickups.add(new Pickup(position, pickupType));
+				pickups.add(new Pickup(position, pickupType, isVisible));
 			}
 		}
 		

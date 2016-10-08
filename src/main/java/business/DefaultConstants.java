@@ -11,7 +11,7 @@ public class DefaultConstants {
 	public static final Vector DEFAULT_SPEED = new Vector(48, 48);
 	public static final Vector PLAYER_SPEED = new Vector(48, 48);
 	public static final Vector PLAYER_SIZE = new Vector(12, 10);
-	public static final Vector USE_SIZE = new Vector(2, 2);
+	public static final Vector USE_SIZE = new Vector(8, 8);
 	public static final Vector PLAYER_OFFSET = new Vector(-2, 0);
 	public static final int PLAYER_WALK_FRAMES = 8;
 	public static final Vector SCREEN_SIZE = new Vector(TILE_SIZE*13.5f, TILE_SIZE*10);

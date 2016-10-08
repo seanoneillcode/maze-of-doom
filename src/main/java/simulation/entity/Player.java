@@ -85,22 +85,25 @@ public class Player extends MovingEntity implements CanBeAnimated, CanBeDamaged 
 	private void updateUseEntity() {
 		Vector pos = new Vector(getPosition());
 		Vector offset = getSize().multiply(0.5f);
-		pos = pos.add(offset);
 		
 		Vector size = useEntity.getSize();
 		if (isUsing) {
 			switch (getDirection()) {
 			case DOWN:
-				pos.y -= offset.y + size.y;
+				pos.x += offset.x - (size.x * 0.5f);
+				pos.y -= size.y;
 				break;
 			case UP:
-				pos.y += offset.y;
+				pos.x += offset.x - (size.x * 0.5f);
+				pos.y += getSize().y;
 				break;
 			case LEFT:
-				pos.x -= offset.x + size.x;
+				pos.x -= getSize().x - (size.x * 0.5f);
+				pos.y += offset.y - (size.y * 0.5f);
 				break;
 			case RIGHT:
-				pos.x += offset.x;
+				pos.x += getSize().x;
+				pos.y += offset.y - (size.y * 0.5f);
 				break;
 			}
 		}

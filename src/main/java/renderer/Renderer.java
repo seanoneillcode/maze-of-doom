@@ -102,7 +102,9 @@ public class Renderer {
 	private List<Drawable> loadEntities(List<Entity> entities, List<Drawable> drawables) {
 		for (Entity entity : entities) {
 			if (entity.getType() == EntityType.PICKUP) {
-				drawables.add(new PickupDrawable((Pickup)entity));
+				if (((Pickup)entity).isVisible()) {
+					drawables.add(new PickupDrawable((Pickup)entity));
+				}
 			}
 		}
 		return drawables;
