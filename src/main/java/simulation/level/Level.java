@@ -39,7 +39,7 @@ public class Level {
 
 	public Level() {
 		nodes = new HashMap<String, Node>();
-		nodes.put("house", NodeLoader.load("nodes/house/house.tmx", "house"));
+//		nodes.put("house", NodeLoader.load("nodes/house/house.tmx", "house"));
 		nodes.put("clearing", NodeLoader.load("nodes/clearing/clearing.tmx", "clearing"));
 		nodes.put("boulder", NodeLoader.load("nodes/boulder/boulder.tmx", "boulder"));
 		nodes.put("stairs", NodeLoader.load("nodes/stairs/stairs.tmx", "stairs"));
@@ -47,6 +47,7 @@ public class Level {
 		nodes.put("boulderpuzzle", NodeLoader.load("nodes/boulder/boulderpuzzle01.tmx", "boulderpuzzle"));
 		nodes.put("castlelevel01", NodeLoader.load("nodes/door/castlelevel01.tmx", "castlelevel01"));
 		nodes.put("castlelevel02", NodeLoader.load("nodes/door/castlelevel02.tmx", "castlelevel02"));
+		nodes.put("house", NodeLoader.load("nodes/burning-house/burning-house.tmx", "house"));
 		activeNode = nodes.get("house");
 		activeEnemies = activeNode.getEnemies();
 		activeObsticles = activeNode.getObsticles();

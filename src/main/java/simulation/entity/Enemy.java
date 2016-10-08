@@ -14,22 +14,28 @@ public class Enemy extends MovingEntity implements CanBeDamaged, CanBeAnimated {
 	private float damageCooldown;
 	private static final float DAMAGE_COOLDOWN_START = 0.6f;
 	private int maxHealth;
-	
-	public Enemy(Vector position, Vector size, Vector speed, int health) {
+	private EnemyType enemyType;
+
+	public Enemy(Vector position, Vector size, Vector speed, int health, EnemyType enemyType) {
 		super(position, size, speed);
 		this.health = health;
 		this.maxHealth = health;
 		ai = new EnemyIntelligence();
+		this.enemyType = enemyType;
 	}
 	
 	public Enemy(Enemy enemy) {
-		this(enemy.getPosition(), enemy.getSize(), enemy.getSpeed(), enemy.getHealth());
+		this(enemy.getPosition(), enemy.getSize(), enemy.getSpeed(), enemy.getHealth(), enemy.getEnemyType());
 	}
 	
 	public Enemy(Vector position, EnemyType enemyType) {
-		this(position, enemyType.getSize(), enemyType.getSpeed(), enemyType.getHealth());
+		this(position, enemyType.getSize(), enemyType.getSpeed(), enemyType.getHealth(), enemyType);
 	}
-	
+
+	public EnemyType getEnemyType() {
+		return enemyType;
+	}
+
 	@Override
 	public int getHealth() {
 		return health;
@@ -59,7 +65,9 @@ public class Enemy extends MovingEntity implements CanBeDamaged, CanBeAnimated {
 
 	@Override
 	public boolean canBeDamaged() {
-		return getEntity().getState() == EntityState.ALIVE && damageState == DamageState.NONE;
+		return getEntity().getState() == EntityState.ALIVE
+				&& damageState == DamageState.NONE
+				&& enemyType == EnemyType.BLOB;
 	}
 
 	@Override
@@ -79,7 +87,9 @@ public class Enemy extends MovingEntity implements CanBeDamaged, CanBeAnimated {
 	}
 	
 	public void think(Player player, float delta) {
-		ai.think(player, this, delta);
+		if (enemyType == EnemyType.BLOB) {
+			ai.think(player, this, delta);
+		}
 	}
 
 	@Override

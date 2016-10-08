@@ -25,29 +25,51 @@ public class EnemyDrawable implements Drawable {
 		this.enemy = enemy;
 		enemyHandler = new EntityAnimationHandler();
 		Map<Direction, ImageList> enemyImages = new HashMap<Direction, ImageList>();
-		enemyImages.put(Direction.DOWN, new ImageList("characters/blob/walkdown.png", 
-				new Vector(DefaultConstants.TILE_SIZE, DefaultConstants.TILE_SIZE),
-				2,
-				new Vector(EnemyType.BLOB.getOffset())));
-		enemyImages.put(Direction.UP, new ImageList("characters/blob/walkup.png", 
-				new Vector(DefaultConstants.TILE_SIZE, DefaultConstants.TILE_SIZE),
-				2,
-				new Vector(EnemyType.BLOB.getOffset())));
-		enemyImages.put(Direction.LEFT, new ImageList("characters/blob/walkleft.png", 
-				new Vector(DefaultConstants.TILE_SIZE, DefaultConstants.TILE_SIZE),
-				2,
-				new Vector(EnemyType.BLOB.getOffset())));
-		enemyImages.put(Direction.RIGHT, new ImageList("characters/blob/walkright.png", 
-				new Vector(DefaultConstants.TILE_SIZE, DefaultConstants.TILE_SIZE),
-				2,
-				new Vector(EnemyType.BLOB.getOffset())));
-		enemyHandler.addEntityAnimation("walk", new EnemyWalkAnimation(enemyImages));
-		enemyHandler.setActiveAnimation("walk");
-		enemyHandler.addEntityAnimation("dead", new EntityHurtAnimation(new ImageList(
-				"characters/blob/dead.png", 
-				new Vector(DefaultConstants.TILE_SIZE, DefaultConstants.TILE_SIZE), 
-				3,
-				new Vector())));
+		if (enemy.getEnemyType() == EnemyType.BLOB) {
+			enemyImages.put(Direction.DOWN, new ImageList("characters/blob/walkdown.png",
+					new Vector(DefaultConstants.TILE_SIZE, DefaultConstants.TILE_SIZE),
+					2,
+					new Vector(enemy.getEnemyType().getOffset())));
+			enemyImages.put(Direction.UP, new ImageList("characters/blob/walkup.png",
+					new Vector(DefaultConstants.TILE_SIZE, DefaultConstants.TILE_SIZE),
+					2,
+					new Vector(enemy.getEnemyType().getOffset())));
+			enemyImages.put(Direction.LEFT, new ImageList("characters/blob/walkleft.png",
+					new Vector(DefaultConstants.TILE_SIZE, DefaultConstants.TILE_SIZE),
+					2,
+					new Vector(enemy.getEnemyType().getOffset())));
+			enemyImages.put(Direction.RIGHT, new ImageList("characters/blob/walkright.png",
+					new Vector(DefaultConstants.TILE_SIZE, DefaultConstants.TILE_SIZE),
+					2,
+					new Vector(enemy.getEnemyType().getOffset())));
+			enemyHandler.addEntityAnimation("walk", new EnemyWalkAnimation(enemyImages));
+			enemyHandler.setActiveAnimation("walk");
+			enemyHandler.addEntityAnimation("dead", new EntityHurtAnimation(new ImageList(
+					"characters/blob/dead.png",
+					new Vector(DefaultConstants.TILE_SIZE, DefaultConstants.TILE_SIZE),
+					3,
+					new Vector())));
+		}
+		if (enemy.getEnemyType() == EnemyType.FIRE) {
+			enemyImages.put(Direction.DOWN, new ImageList("characters/fire/fire.png",
+					new Vector(DefaultConstants.TILE_SIZE, DefaultConstants.TILE_SIZE),
+					2,
+					new Vector(enemy.getEnemyType().getOffset())));
+			enemyImages.put(Direction.UP, new ImageList("characters/fire/fire.png",
+					new Vector(DefaultConstants.TILE_SIZE, DefaultConstants.TILE_SIZE),
+					2,
+					new Vector(enemy.getEnemyType().getOffset())));
+			enemyImages.put(Direction.LEFT, new ImageList("characters/fire/fire.png",
+					new Vector(DefaultConstants.TILE_SIZE, DefaultConstants.TILE_SIZE),
+					2,
+					new Vector(enemy.getEnemyType().getOffset())));
+			enemyImages.put(Direction.RIGHT, new ImageList("characters/fire/fire.png",
+					new Vector(DefaultConstants.TILE_SIZE, DefaultConstants.TILE_SIZE),
+					2,
+					new Vector(enemy.getEnemyType().getOffset())));
+			enemyHandler.addEntityAnimation("walk", new EnemyWalkAnimation(enemyImages));
+			enemyHandler.setActiveAnimation("walk");
+		}
 	}
 	
 	@Override

@@ -16,7 +16,7 @@ public class Simulation {
 	private Level level;
 	
 	public Simulation() {
-		player = new Player(new Vector(128,116));
+		player = new Player(new Vector(16 * 6,16 * 14));
 		level = new Level();
 		postDeath = new Event(DefaultConstants.DEATH_DURATION);
 		simulationDone = false;
