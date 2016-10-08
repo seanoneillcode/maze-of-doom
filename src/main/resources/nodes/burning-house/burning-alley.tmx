@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="16" tileheight="16" backgroundcolor="#000000" nextobjectid="26">
+ <properties>
+  <property name="path" value="/res/min/house"/>
+  <property name="weather" value="smoke"/>
+ </properties>
+ <tileset firstgid="1" name="outside-alley" tilewidth="16" tileheight="16" tilecount="60" columns="10">
+  <image source="outside-alley.png" width="160" height="96"/>
+ </tileset>
+ <layer name="ground" width="20" height="20" offsetx="0" offsety="160">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NgwA300DClAJt5qjhoSsxDx0PdPDYSzSPWbHzxi08vuj5S8ah51DUPBPSJsIeQehjAlY5ITX/DzTxi8xot3IeNJmQeNj3IQAmNT0w6Q9cDAPRoQNxABgAA
+  </data>
+ </layer>
+ <layer name="walls" width="20" height="20" offsetx="0" offsety="160">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA81UQQrDMAzzKdd8oYUQSFlhu/b/D1sKNghPTkPZYALhNrGEXEN3EdkDerTO1Ll0Zq1poGd+h/MT9cD6mCTLx5Amaaiac+RXQFeCevo8O1838xX5zFcn5kXYzjyZdgPie3PPiAN6ETg3y8SeR7CdfMvPPPF7mv9dv2jmK79oLp8v8vP7YnvCXtZvmmjeRnKeZznot/uR38zZP/ld4Zf5FldRW8lZpFmVeLfqHf6vqus3TXaaNx2X3LdABgAA
+  </data>
+ </layer>
+ <objectgroup name="objects"/>
+ <layer name="cover" width="20" height="20" visible="0">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NgGAWjYBSMglEwCkgHADV9EcVABgAA
+  </data>
+ </layer>
+</map>
