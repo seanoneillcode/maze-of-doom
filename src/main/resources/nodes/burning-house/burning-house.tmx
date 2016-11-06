@@ -9,24 +9,24 @@
  </tileset>
  <layer name="ground" width="20" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA2NgIAwY0fgKQKwEpQnpIwaDzGGnonmMUPMIAWS1MIzOx4bxmScFxdQyD10tLc3DZTY2c7CFHbFuJdc8Uv3LgKRGEYrJ8S8285DVYmMPV/OoFR+k6iMFcELxKKA9AACKA+ObQAYAAA==
+   H4sIAAAAAAAAC2NgIAwY0fgKQKwEpQnpIwaDzGGnonmMUPMIAWS1MIzOx4bxmScFxdQyD10tLc3DZTY2c7CFHbFuJdc8Uv3LgKRGEYrJ8S8285DVYmMPV/OoFR+k6iMFcELxKKA9AACKA+ObQAYAAA==
   </data>
  </layer>
  <layer name="walls" width="20" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+1TywrDMAxLLzmk3cpKKOxxWP//J5eADMLUTjJ2nEFYcf0Q2A1h3N7K99gBMBdwv0MXGvNjQQJPwFZwgw8qx9Ml3zN4Bl4FT/igcixdD4Bjlt0bOTW+AD39vJwJ8R0Qi6rubE+evpaOSDOEe3X6NvgeRnXUeKK5+hbO6tZGv0xvfQvCa49LwRXw+s30nhv6ViPO+bzbynm/zHv1fWNenfXvS523/9HZno6//cY+EXOJAEAGAAA=
+   H4sIAAAAAAAAC+1TywqEMAysFw91V1kpe1g96P//5LYwgSHYpF08bmDINOYxkBhCvx3Kt9gJMBdwv1MXVuaPGRE8AmvGCz6oHEuXfE/gCdgzNvigcmq6PpjLMc+sfo/GXC9nQPyt4lrr1Z4sfZ6OkWYIt+r0bfA99Ooo8Uhz9S1c1S1Ov0RvfQvCS49nxgxY/SZ6T46+pRLnfN5v4bxf5q36fjGrrvbvS521/97Zlo6/3WNf4zGCekAGAAA=
   </data>
  </layer>
  <objectgroup name="objects">
   <object id="1" name="link" x="224" y="0" width="16" height="16">
    <properties>
     <property name="direction" value="up"/>
-    <property name="node" value="clearing"/>
+    <property name="node" value="burning-alley"/>
    </properties>
   </object>
-  <object id="2" name="dialog" x="240" y="64" width="16" height="16">
+  <object id="2" name="pickup" x="112" y="48" width="16" height="16" visible="0">
    <properties>
-    <property name="text" value="I am dead"/>
+    <property name="type" value="book"/>
    </properties>
   </object>
   <object id="4" name="enemy" x="192" y="128" width="16" height="16">
@@ -127,7 +127,7 @@
  </objectgroup>
  <layer name="cover" width="20" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA2NgGLlAfKAdMApGwSgYBUMYAADczfYYQAYAAA==
+   H4sIAAAAAAAAC2NgGLlAfKAdMApGwSgYBUMYAADczfYYQAYAAA==
   </data>
  </layer>
 </map>

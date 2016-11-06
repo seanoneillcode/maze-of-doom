@@ -21,14 +21,9 @@ import com.badlogic.gdx.math.Rectangle;
 import business.DefaultConstants;
 import core.Direction;
 import core.Vector;
+import simulation.story.Story;
 import simulation.dialog.Dialog;
-import simulation.entity.DialogEntity;
-import simulation.entity.Enemy;
-import simulation.entity.EnemyType;
-import simulation.entity.Entity;
-import simulation.entity.Fall;
-import simulation.entity.Pickup;
-import simulation.entity.PickupType;
+import simulation.entity.*;
 import simulation.entity.mechanism.Mechanism;
 import simulation.entity.mechanism.MechanismFactory;
 import simulation.entity.mechanism.MechanismType;
@@ -56,6 +51,7 @@ public class NodeLoader {
 	private static final String DIALOG_TYPE = "dialog";
 	private static final String TEXT_KEY = "text";
 	private static final String WEATHER_KEY = "weather";
+	private static final String STORY_TYPE = "story";
 
 	private static final String ID_SPLIT_REGEX = ",";
 	
@@ -64,7 +60,7 @@ public class NodeLoader {
 	private static final float FALL_OFFSET = 8.0f;
 	
 	
-	public static Node load(String mapFile, String name) {
+	public static Node load(String mapFile, String name, Story story) {
 		Node node = new Node();
 		
 		TiledMap map = new TmxMapLoader().load(mapFile);
@@ -82,7 +78,32 @@ public class NodeLoader {
 		node.setDialogEntitys(getDialogEntitys(map));
 		node.addEntities(getFalls(map));
 		node.setWeather(getHasWeather(map));
+		node.setSceneEntities(getStory(map, story));
 		return node;
+	}
+
+	private static List<SceneEntity> getStory(TiledMap map, Story story) {
+		List<SceneEntity> sceneEntities = new ArrayList<>();
+
+		MapLayer layer = map.getLayers().get(OBJECT_LAYER);
+		MapObjects mapObjects = layer.getObjects();
+
+		Iterator<MapObject> iterator = mapObjects.iterator();
+
+		while(iterator.hasNext()) {
+			MapObject mapObject = iterator.next();
+			if (mapObject.getName().equals(STORY_TYPE)) {
+				RectangleMapObject rectangleObject = (RectangleMapObject)mapObject;
+				Rectangle rectangle = rectangleObject.getRectangle();
+				Vector position = new Vector(rectangle.x, rectangle.y);
+				Vector size = new Vector(rectangle.width, rectangle.height);
+				MapProperties properties = mapObject.getProperties();
+				String id = (String)properties.get(ID_KEY);
+                sceneEntities.add(new SceneEntity(position, size, story.getScene(id)));
+			}
+		}
+
+		return sceneEntities;
 	}
 
 	private static boolean getHasWeather(TiledMap map) {

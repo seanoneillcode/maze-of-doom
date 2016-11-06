@@ -41,5 +41,9 @@ public class Entity {
 		return pos;
 	}
 
+	public void setPosition(Vector position) {
+		this.pos = position;
+	}
+
 	public EntityType getType() { return type; }
 }

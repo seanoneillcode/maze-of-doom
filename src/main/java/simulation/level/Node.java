@@ -7,12 +7,7 @@ import java.util.List;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import core.Vector;
-import simulation.entity.DialogEntity;
-import simulation.entity.Enemy;
-import simulation.entity.Entity;
-import simulation.entity.EntityType;
-import simulation.entity.Fall;
-import simulation.entity.Pickup;
+import simulation.entity.*;
 import simulation.entity.mechanism.Mechanism;
 import simulation.entity.mechanism.MechanismFactory;
 import simulation.entity.obsticle.Obsticle;
@@ -32,8 +27,21 @@ public class Node {
 	List<Mechanism> mechanisms;
 	List<DialogEntity> dialogEntitys;
 	List<Entity> entities = new ArrayList<Entity>();
+	List<SceneEntity> sceneEntities;
 	boolean hasWeather = false;
-	
+
+	public void setSceneEntities(List<SceneEntity> sceneEntities) {
+		this.sceneEntities = sceneEntities;
+	}
+
+	public List<SceneEntity> getSceneEntities() {
+		List<SceneEntity> copy = new ArrayList<>();
+		for (SceneEntity sceneEntity : sceneEntities) {
+			copy.add(new SceneEntity(sceneEntity));
+		}
+		return copy;
+	}
+
 	public void setDialogEntitys(List<DialogEntity> dialogEntitys) {
 		this.dialogEntitys = dialogEntitys;
 	}

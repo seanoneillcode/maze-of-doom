@@ -34,15 +34,16 @@ scene 2 : forest
 scene 3 : plains battle
 
 enter name:
-bad dream
+bad dream - starts good
 you smell smoke and awake
 action - inside house - place is on fire
 push things to get outside
-once out side fight monsters
-shadow man is seen
-fight unsuccessfully - pass out (inner conflict, didn't win fight)
-wake up in forest
-make friend - pulled you out of battle (conflict with friend) - bit of a rogue
+given task - get magic weapon to kill shadows
+once out side, kill normal monsters
+go to main square - statue holds magic weapon
+kill some shadow creatures to escape
+go to forest
+save a person - make friend - pulled them out of battle (conflict with friend) - friend is a bit of a rogue
 goal is to tell lord about evil shadow
 travel over hills and fight to get to small castle
  rivers

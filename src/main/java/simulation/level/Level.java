@@ -8,15 +8,11 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import business.DefaultConstants;
 import core.Vector;
 import simulation.Event;
+import simulation.story.Actor;
+import simulation.story.Scene;
+import simulation.story.Story;
 import simulation.dialog.Dialog;
-import simulation.entity.CollisionHandler;
-import simulation.entity.DialogEntity;
-import simulation.entity.Enemy;
-import simulation.entity.Entity;
-import simulation.entity.EntityType;
-import simulation.entity.Fall;
-import simulation.entity.Pickup;
-import simulation.entity.Player;
+import simulation.entity.*;
 import simulation.entity.mechanism.Mechanism;
 import simulation.entity.obsticle.Obsticle;
 import simulation.entity.state.AttackState;
@@ -35,25 +31,33 @@ public class Level {
 	private Node newNode;
 	private Link linkTo;
 	private List<DialogEntity> activeDialogEntitys;
+    private List<SceneEntity> activeSceneEntities;
 	private Dialog activeDialog;
+    private Scene activeScene;
+    private Story story;
 
 	public Level() {
+        Story story = new Story();
 		nodes = new HashMap<String, Node>();
-//		nodes.put("house", NodeLoader.load("nodes/house/house.tmx", "house"));
-		nodes.put("clearing", NodeLoader.load("nodes/clearing/clearing.tmx", "clearing"));
-		nodes.put("boulder", NodeLoader.load("nodes/boulder/boulder.tmx", "boulder"));
-		nodes.put("stairs", NodeLoader.load("nodes/stairs/stairs.tmx", "stairs"));
-		nodes.put("door", NodeLoader.load("nodes/door/door.tmx", "door"));
-		nodes.put("boulderpuzzle", NodeLoader.load("nodes/boulder/boulderpuzzle01.tmx", "boulderpuzzle"));
-		nodes.put("castlelevel01", NodeLoader.load("nodes/door/castlelevel01.tmx", "castlelevel01"));
-		nodes.put("castlelevel02", NodeLoader.load("nodes/door/castlelevel02.tmx", "castlelevel02"));
-		nodes.put("house", NodeLoader.load("nodes/burning-house/burning-house.tmx", "house"));
-		activeNode = nodes.get("house");
+        nodes.put("burning-alley", NodeLoader.load("nodes/burning-house/burning-alley.tmx", "burning-alley", story));
+		nodes.put("house", NodeLoader.load("nodes/house/house.tmx", "house", story));
+		nodes.put("clearing", NodeLoader.load("nodes/clearing/clearing.tmx", "clearing", story));
+		nodes.put("boulder", NodeLoader.load("nodes/boulder/boulder.tmx", "boulder", story));
+		nodes.put("stairs", NodeLoader.load("nodes/stairs/stairs.tmx", "stairs", story));
+		nodes.put("door", NodeLoader.load("nodes/door/door.tmx", "door", story));
+		nodes.put("boulderpuzzle", NodeLoader.load("nodes/boulder/boulderpuzzle01.tmx", "boulderpuzzle", story));
+		nodes.put("castlelevel01", NodeLoader.load("nodes/door/castlelevel01.tmx", "castlelevel01", story));
+		nodes.put("castlelevel02", NodeLoader.load("nodes/door/castlelevel02.tmx", "castlelevel02", story));
+		nodes.put("burning-house", NodeLoader.load("nodes/burning-house/burning-house.tmx", "burning-house", story));
+
+		activeNode = nodes.get("burning-alley");
 		activeEnemies = activeNode.getEnemies();
 		activeObsticles = activeNode.getObsticles();
 		activeMechanisms = activeNode.getMechanisms();
 		activeEntities = activeNode.getEntities();
 		activeDialogEntitys = activeNode.getDialogEntitys();
+        activeSceneEntities = activeNode.getSceneEntities();
+        activeScene = null;
 		loadNode = true;
 		loadMap = new Event(DefaultConstants.MAP_LOAD_DURATION);
 		activeDialog = null;
@@ -108,33 +112,53 @@ public class Level {
 		return null;
 	}
 
+	public Vector getStartPosition() {
+        Link link = activeNode.getLinks().get(0);
+        Vector start = link.getEntity().getPosition();
+        start = start.sub(link.getDirection().getVector().multiply(16));
+		return start;
+	}
+
 	public void update(Player player, float delta) {
-		if (activeDialog != null) {
-			activeDialog.update(delta);
-		} else {
-			loadMap.update(delta);
-			if (loadMap.isDone()) {
-				if (!loadNode) {
-					actuallyLoadTheNextMap(player);
-					loadMap.reset();
-				}
-				loadNode = true;
-			} else {
-				loadNode = false;
-			}
-			if (!loadMap.isStarted()) {
-				updateEnemies(player, delta);
-				updateLinks(player, activeNode.getLinks());
-				updateObsticles(player, delta);
-				updateMechanisms(player, delta);
-				updateEntities(player, delta);
-				updateDialogEntities(player, delta);
-			}
-		}
+        if (isPaused()) {
+            if (activeDialog != null) {
+                activeDialog.update(delta);
+            }
+            if (activeScene != null) {
+                Actor actor = new Actor(player.getEntity());
+                activeScene.update(actor, delta);
+                activeDialog = activeScene.getDialog();
+                if (activeScene.isDone()) {
+                    activeScene = null;
+                    activeDialog = null;
+                }
+            }
+        } else {
+            loadMap.update(delta);
+            if (loadMap.isDone()) {
+                if (!loadNode) {
+                    actuallyLoadTheNextMap(player);
+                    loadMap.reset();
+                }
+                loadNode = true;
+            } else {
+                loadNode = false;
+            }
+            if (!loadMap.isStarted()) {
+                updateEnemies(player, delta);
+                updateLinks(player, activeNode.getLinks());
+                updateObsticles(player, delta);
+                updateMechanisms(player, delta);
+                updateEntities(player, delta);
+                updateDialogEntities(player, delta);
+                updateSceneEntities(player, delta);
+            }
+        }
 	}
 
 	public void use(Player player) {
 		if (activeDialog != null) {
+			activeDialog.continueProgress();
 			if (activeDialog.isDone()) {
 				activeDialog.reset();
 				activeDialog = null;
@@ -143,6 +167,19 @@ public class Level {
 			}
 		}
 	}
+
+    private void updateSceneEntities(Player player, float delta) {
+        if (activeSceneEntities.size() > 0 && activeScene == null) {
+            for (SceneEntity sceneEntity : activeSceneEntities) {
+                if (!sceneEntity.getScene().isDone()) {
+                    if (CollisionHandler.isColliding(player, sceneEntity, delta)) {
+                        activeScene = sceneEntity.getScene();
+                        activeScene.start();
+                    }
+                }
+            }
+        }
+    }
 
 	private void updateDialogEntities(Player player, float delta) {
 		if (activeDialogEntitys.size() > 0) {
@@ -209,7 +246,7 @@ public class Level {
 	}
 
 	public boolean isPaused() {
-		return activeDialog != null;
+		return activeDialog != null || activeScene != null;
 	}
 
 	public float getLoadPercentage() {
@@ -305,6 +342,7 @@ public class Level {
 		activeMechanisms = activeNode.getMechanisms();
 		activeEntities = activeNode.getEntities();
 		activeDialogEntitys = activeNode.getDialogEntitys();
+        activeSceneEntities = activeNode.getSceneEntities();
 		activeDialog = null;
 		player.setMovement(new Vector());
 		player.setPhysics(new Vector());

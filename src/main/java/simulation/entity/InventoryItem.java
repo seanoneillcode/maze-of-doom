@@ -4,5 +4,6 @@ public enum InventoryItem {
 
 	SWORD,
 	MILK,
+	BOOK,
 	TOME;
 }

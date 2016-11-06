@@ -17,6 +17,13 @@ public enum PickupType {
 		}
 	},
 	
+	BOOK(new Vector(8,8)) {
+		@Override
+		public void getPickedUp(Player player) {
+			player.getInventory().addItem(InventoryItem.BOOK);
+		}
+	},
+	
 	MILK(new Vector(8,8)) {
 		@Override
 		public void getPickedUp(Player player) {

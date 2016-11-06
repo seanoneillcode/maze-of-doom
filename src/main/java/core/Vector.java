@@ -53,4 +53,13 @@ public class Vector {
 		}
 		return result;
 	}
+
+	public boolean isNear(Vector other, float tolerance) {
+        float xtol = Math.abs(other.x) - Math.abs(this.x);
+        float ytol = Math.abs(other.y) - Math.abs(this.y);
+        if (Math.abs(xtol) < tolerance && Math.abs(ytol) < tolerance) {
+            return true;
+        }
+        return false;
+    }
 }

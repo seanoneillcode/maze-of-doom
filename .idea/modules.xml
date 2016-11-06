@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/maze-of-doom.iml" filepath="$PROJECT_DIR$/.idea/modules/maze-of-doom.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/maze-of-doom_main.iml" filepath="$PROJECT_DIR$/.idea/modules/maze-of-doom_main.iml" group="maze-of-doom" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/maze-of-doom_test.iml" filepath="$PROJECT_DIR$/.idea/modules/maze-of-doom_test.iml" group="maze-of-doom" />
+    </modules>
+  </component>
+</project>

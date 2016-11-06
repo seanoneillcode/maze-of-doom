@@ -16,6 +16,8 @@ public class Dialog {
 	private static final int MAX_NUMBER_OF_LINES = 2;
 	private int startLine, endLine;
 	private int cursor;
+	private boolean isWaitingToContinue;
+	private boolean isDone;
 	
 	public Dialog(String text) {
 		currentText = "";
@@ -23,6 +25,8 @@ public class Dialog {
 		startLine = 0;
 		endLine = 0;
 		cursor = 0;
+		isWaitingToContinue = false;
+		isDone = false;
 	}
 	
 	private List<String> getLines(String fullText, int lineLength) {
@@ -44,14 +48,12 @@ public class Dialog {
 	
 	public List<String> getLines() {
 		List<String> currentLines = new ArrayList<String>();
-		for (int index = 0; index < fullLines.size(); index++) {
-			if (index >= startLine && index <= endLine) {
-				String next = fullLines.get(index);
-				if (index == endLine) {
-					next = next.substring(0, cursor);
-				}
-				currentLines.add(next);
+		for (int index = startLine; index < fullLines.size() && index <= endLine; index++) {
+			String next = fullLines.get(index);
+			if (index == endLine) {
+				next = next.substring(0, cursor);
 			}
+			currentLines.add(next);
 		}
 		
 		return currentLines;
@@ -70,11 +72,23 @@ public class Dialog {
 	}
 	
 	public boolean isDone() {
-		return endLine >= fullLines.size();
+		return isDone;
+	}
+	
+	public void continueProgress() {
+		if (isWaitingToContinue) {
+			isWaitingToContinue = false;
+			startLine++;			
+		}
+		if (endLine >= fullLines.size()) {
+			isDone = true;
+		}
 	}
 	
 	public void update(float delta) {
-		charTimer += delta;
+		if (!isWaitingToContinue) {
+			charTimer += delta;			
+		}
 		if (charTimer > CHAR_PAUSE && !isDone()) {
 			cursor++;
 			if (cursor > fullLines.get(endLine).length()) {
@@ -82,7 +96,7 @@ public class Dialog {
 				endLine++;
 			}
 			if (endLine - startLine > MAX_NUMBER_OF_LINES) {
-				startLine++;
+				isWaitingToContinue = true;
 			}
 			charTimer = 0;
 		}

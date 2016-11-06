@@ -48,7 +48,7 @@ public class Renderer {
 	boolean mapIsLoaded;
 	private static float SCALE_POSITION = 100.0f;
 	EntitySprite heart, emptyHeart;
-	EntitySprite blankScreen;
+	EntitySprite blankScreen, testScreen;
 	List<Drawable> drawables;
 	DialogDrawable dialogDrawable;
 	EntitySprite weatherLayer;
@@ -64,6 +64,7 @@ public class Renderer {
 		heart = new EntitySprite("ui/heart.png", new Vector(7, 7));
 		emptyHeart = new EntitySprite("ui/emptyheart.png", new Vector(7, 7));
 		blankScreen = new EntitySprite("ui/blankscreen.png", new Vector(224, 160));
+		testScreen = new EntitySprite("story/test-screen.png", new Vector(224, 160));
 		mapIsLoaded = false;
 		dialogDrawable = new DialogDrawable();
 		weatherLayer = new EntitySprite("characters/smoke.png", new Vector(32, 32));
