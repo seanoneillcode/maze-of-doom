@@ -33,11 +33,11 @@ public class Level {
 	private List<DialogEntity> activeDialogEntitys;
     private List<SceneEntity> activeSceneEntities;
 	private Dialog activeDialog;
-    private Scene activeScene;
+
     private Story story;
 
-	public Level() {
-        Story story = new Story();
+	public Level(Story story) {
+
 		nodes = new HashMap<String, Node>();
         nodes.put("burning-alley", NodeLoader.load("nodes/burning-house/burning-alley.tmx", "burning-alley", story));
 		nodes.put("house", NodeLoader.load("nodes/house/house.tmx", "house", story));
@@ -57,10 +57,11 @@ public class Level {
 		activeEntities = activeNode.getEntities();
 		activeDialogEntitys = activeNode.getDialogEntitys();
         activeSceneEntities = activeNode.getSceneEntities();
-        activeScene = null;
 		loadNode = true;
 		loadMap = new Event(DefaultConstants.MAP_LOAD_DURATION);
 		activeDialog = null;
+        this.story = story;
+		this.story.setActiveScene(null);
 	}
 
 	public boolean hasWeather() {
@@ -124,14 +125,9 @@ public class Level {
             if (activeDialog != null) {
                 activeDialog.update(delta);
             }
-            if (activeScene != null) {
-                Actor actor = new Actor(player.getEntity());
-                activeScene.update(actor, delta);
-                activeDialog = activeScene.getDialog();
-                if (activeScene.isDone()) {
-                    activeScene = null;
-                    activeDialog = null;
-                }
+            story.update(player, delta);
+            if (story.getActiveScene() != null) {
+                activeDialog = story.getActiveDialog();
             }
         } else {
             loadMap.update(delta);
@@ -169,12 +165,14 @@ public class Level {
 	}
 
     private void updateSceneEntities(Player player, float delta) {
+		Scene activeScene = story.getActiveScene();
         if (activeSceneEntities.size() > 0 && activeScene == null) {
             for (SceneEntity sceneEntity : activeSceneEntities) {
                 if (!sceneEntity.getScene().isDone()) {
                     if (CollisionHandler.isColliding(player, sceneEntity, delta)) {
                         activeScene = sceneEntity.getScene();
                         activeScene.start();
+						story.setActiveScene(activeScene);
                     }
                 }
             }
@@ -246,7 +244,7 @@ public class Level {
 	}
 
 	public boolean isPaused() {
-		return activeDialog != null || activeScene != null;
+		return activeDialog != null || story.getActiveScene() != null;
 	}
 
 	public float getLoadPercentage() {

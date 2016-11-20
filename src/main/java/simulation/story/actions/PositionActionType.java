@@ -8,10 +8,12 @@ public class PositionActionType implements SceneActionType {
 
     Vector position;
     boolean isDone;
+    Actor actor;
 
-    public PositionActionType(Vector position) {
+    public PositionActionType(Actor actor, Vector position) {
         this.position = position;
         isDone = false;
+        this.actor = actor;
     }
 
     @Override
@@ -24,9 +26,9 @@ public class PositionActionType implements SceneActionType {
     }
 
     @Override
-    public void update(Actor actor, float delta) {
+    public void update(float delta) {
         if (!isDone) {
-            actor.getEntity().setPosition(position);
+            actor.getEntity().getEntity().setPosition(position);
             isDone = true;
         }
     }

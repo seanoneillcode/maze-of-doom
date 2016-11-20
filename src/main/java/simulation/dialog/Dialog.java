@@ -55,12 +55,7 @@ public class Dialog {
 			}
 			currentLines.add(next);
 		}
-		
 		return currentLines;
-	}
-	
-	public String getCurrentText() {
-		return currentText;
 	}
 	
 	public void reset() {

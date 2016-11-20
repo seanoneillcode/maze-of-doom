@@ -17,13 +17,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 import business.DefaultConstants;
 import core.Vector;
-import renderer.drawables.DialogDrawable;
-import renderer.drawables.Drawable;
-import renderer.drawables.EnemyDrawable;
-import renderer.drawables.MechanismDrawable;
-import renderer.drawables.ObsticleDrawable;
-import renderer.drawables.PickupDrawable;
-import renderer.drawables.PlayerDrawable;
+import renderer.drawables.*;
 import simulation.Simulation;
 import simulation.dialog.Dialog;
 import simulation.entity.Enemy;
@@ -35,6 +29,8 @@ import simulation.entity.mechanism.Mechanism;
 import simulation.entity.obsticle.Obsticle;
 import simulation.level.Level;
 import simulation.level.Node;
+import simulation.story.Actor;
+import simulation.story.Story;
 
 
 public class Renderer {
@@ -77,30 +73,43 @@ public class Renderer {
 		mapRenderer = new OrthogonalTiledMapRenderer(map, DefaultConstants.UNIT_SIZE);
 		mapRenderer.setView(camera);
 		spriteBatch = mapRenderer.getBatch();
-		drawables = new ArrayList<Drawable>();
+		drawables = new ArrayList<>();
 		drawables.add(new PlayerDrawable(simulation.getPlayer()));
-		drawables = loadEnemies(level.getEnemies(), drawables);
-		drawables = loadEntities(level.getEntities(), drawables);
-		drawables = loadObsticles(level.getObsticles(), drawables);
-		drawables = loadMechanisms(level.getMechanisms(), drawables);
+		drawables.addAll(loadEnemies(level.getEnemies()));
+		drawables.addAll(loadEntities(level.getEntities()));
+		drawables.addAll(loadObsticles(level.getObsticles()));
+		drawables.addAll(loadMechanisms(level.getMechanisms()));
+		drawables.addAll(loadActors(simulation.getStory()));
 		hasWeather = simulation.getLevel().hasWeather();
 	}
-	
-	private List<Drawable> loadObsticles(List<Obsticle> obsticles, List<Drawable> drawables) {
+
+	private List<Drawable> loadActors(Story story) {
+        List<Drawable> drawables = new ArrayList<>();
+        List<Actor> actors = story.getActors();
+        for (Actor actor : actors) {
+            drawables.add(new ActorDrawable(actor));
+        }
+        return drawables;
+	}
+
+	private List<Drawable> loadObsticles(List<Obsticle> obsticles) {
+        List<Drawable> drawables = new ArrayList<>();
 		for (Obsticle obsticle : obsticles) {
 			drawables.add(new ObsticleDrawable(obsticle));
 		}
 		return drawables;
 	}
 	
-	private List<Drawable> loadEnemies(List<Enemy> enemies, List<Drawable> drawables) {
+	private List<Drawable> loadEnemies(List<Enemy> enemies) {
+		List<Drawable> drawables = new ArrayList<>();
 		for (Enemy enemy : enemies) {
 			drawables.add(new EnemyDrawable(enemy));
 		}
 		return drawables;
 	}
 	
-	private List<Drawable> loadEntities(List<Entity> entities, List<Drawable> drawables) {
+	private List<Drawable> loadEntities(List<Entity> entities) {
+        List<Drawable> drawables = new ArrayList<>();
 		for (Entity entity : entities) {
 			if (entity.getType() == EntityType.PICKUP) {
 				if (((Pickup)entity).isVisible()) {
@@ -111,7 +120,8 @@ public class Renderer {
 		return drawables;
 	}
 	
-	private List<Drawable> loadMechanisms(List<Mechanism> mechanisms, List<Drawable> drawables) {
+	private List<Drawable> loadMechanisms(List<Mechanism> mechanisms) {
+        List<Drawable> drawables = new ArrayList<>();
 		for (Mechanism mechanism : mechanisms) {
 			drawables.add(new MechanismDrawable(mechanism));
 		}

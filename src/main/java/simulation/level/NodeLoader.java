@@ -21,6 +21,7 @@ import com.badlogic.gdx.math.Rectangle;
 import business.DefaultConstants;
 import core.Direction;
 import core.Vector;
+import simulation.story.Scene;
 import simulation.story.Story;
 import simulation.dialog.Dialog;
 import simulation.entity.*;
@@ -99,7 +100,11 @@ public class NodeLoader {
 				Vector size = new Vector(rectangle.width, rectangle.height);
 				MapProperties properties = mapObject.getProperties();
 				String id = (String)properties.get(ID_KEY);
-                sceneEntities.add(new SceneEntity(position, size, story.getScene(id)));
+				Scene scene = story.getScene(id);
+				if (scene == null) {
+					throw new RuntimeException("map file referred to a story id but it wasn't found");
+				}
+                sceneEntities.add(new SceneEntity(position, size, scene));
 			}
 		}
 

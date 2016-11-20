@@ -2,9 +2,11 @@ package simulation.entity;
 
 import core.Direction;
 import core.Vector;
+import simulation.entity.state.AttackState;
+import simulation.entity.state.CanBeAnimated;
 
 
-public class MovingEntity {
+public class MovingEntity implements CanBeAnimated {
 
 	private Entity entity;
 	private Vector move;
@@ -113,5 +115,10 @@ public class MovingEntity {
 	
 	public void setPhysics(Vector physics) {
 		this.physics = new Vector(physics);
+	}
+
+	@Override
+	public AttackState getAttackState() {
+		return AttackState.START;
 	}
 }

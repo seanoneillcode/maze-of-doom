@@ -6,66 +6,64 @@ import simulation.story.actions.SceneActionType;
 import simulation.story.actions.DialogActionType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Scene {
 
-    List<SceneActionType> sceneActions;
-    int currentactionIndex = 0;
-    boolean isDone = false;
-    SceneActionType currentAction;
+    List<ActorStream> actorStreams;
 
-    public Scene(List<SceneActionType> sceneActions) {
-        this.sceneActions = sceneActions;
-        currentAction = sceneActions.get(0);
+    public Scene(List<ActorStream> actorStreams) {
+        this.actorStreams = actorStreams;
     }
 
-    public List<SceneActionType> getActions() {
-        return this.sceneActions;
+    public List<ActorStream> getActorStreams() {
+        return this.actorStreams;
     }
 
     public boolean isDone() {
-        return isDone;
-    }
-
-    public void update(Actor actor, float delta) {
-        if (!isDone) {
-            currentAction.update(actor, delta);
-            if (currentAction.isDone()) {
-                currentactionIndex++;
-                if (currentactionIndex >= sceneActions.size()) {
-                    isDone = true;
-                } else {
-                    currentAction = sceneActions.get(currentactionIndex);
-                    currentAction.start();
-                }
+        for (ActorStream stream : actorStreams) {
+            boolean isDone = stream.isDone();
+            if (!isDone) {
+                return false;
             }
         }
+        return true;
     }
 
     public Dialog getDialog() {
-        Dialog dialog = null;
-        if (currentAction instanceof DialogActionType) {
-            return ((DialogActionType) currentAction).getDialog();
+        for (ActorStream stream : actorStreams) {
+            Dialog dialog = stream.getDialog();
+            if (dialog != null) {
+                return dialog;
+            }
         }
-        return dialog;
+        return null;
     }
 
     public void start() {
-        currentactionIndex = 0;
-        sceneActions.get(currentactionIndex).start();
+        for (ActorStream stream : actorStreams) {
+            stream.start();
+        }
     }
 
-    public static SceneBuilder builder() {
+    public void update(float delta) {
+        for (ActorStream stream : actorStreams) {
+            stream.update(delta);
+        }
+    }
+
+    public static SceneBuilder scene() {
         return new SceneBuilder();
     }
 
     public static class SceneBuilder {
 
-        List<SceneActionType> sceneActions = new ArrayList<>();
+        List<ActorStream> sceneActions = new ArrayList<>();
 
-        public SceneBuilder addAction(SceneActionType actionType) {
-            sceneActions.add(actionType);
+        public SceneBuilder add(ActorStream actorStream) {
+            sceneActions.add(actorStream);
             return this;
         }
 

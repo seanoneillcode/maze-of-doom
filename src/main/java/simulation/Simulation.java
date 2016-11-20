@@ -6,6 +6,7 @@ import simulation.entity.CollisionHandler;
 import simulation.entity.Player;
 import simulation.entity.state.EntityState;
 import simulation.level.Level;
+import simulation.story.Story;
 
 
 public class Simulation {
@@ -14,10 +15,14 @@ public class Simulation {
 	private Event postDeath;
 	private boolean simulationDone;
 	private Level level;
+	private Story story;
 	
 	public Simulation() {
-		level = new Level();
-		player = new Player(level.getStartPosition());
+		player = new Player();
+		story = new Story(player);
+		level = new Level(story);
+		player.setPosition(level.getStartPosition());
+
 		postDeath = new Event(DefaultConstants.DEATH_DURATION);
 		simulationDone = false;
 	}
@@ -64,4 +69,8 @@ public class Simulation {
 	public boolean isActive() {
 		return !level.isPaused() && !level.isLoading();
 	}
+
+	public Story getStory () {
+        return story;
+    }
 }

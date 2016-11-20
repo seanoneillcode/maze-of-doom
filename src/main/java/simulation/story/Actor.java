@@ -1,17 +1,28 @@
 package simulation.story;
 
-
-import simulation.entity.Entity;
+import simulation.entity.MovingEntity;
 
 public class Actor {
 
-    Entity entity;
+    MovingEntity entity;
 
-    public Entity getEntity() {
+    public boolean isMoving() {
+        return isMoving;
+    }
+
+    public void setMoving(boolean moving) {
+        isMoving = moving;
+    }
+
+    boolean isMoving = false;
+
+    public MovingEntity getEntity() {
         return entity;
     }
 
-    public Actor(Entity entity) {
+    public Actor(MovingEntity entity) {
         this.entity = entity;
     }
+
+
 }

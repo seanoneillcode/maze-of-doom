@@ -21,7 +21,7 @@ public class DialogActionType implements SceneActionType {
     }
 
     @Override
-    public void update(Actor actor, float delta) {
+    public void update(float delta) {
         //dialog.update(delta);
     }
 

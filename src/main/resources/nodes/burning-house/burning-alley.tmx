@@ -136,7 +136,7 @@
   </object>
   <object id="50" name="story" x="128" y="144" width="16" height="16">
    <properties>
-    <property name="id" value="test-scene"/>
+    <property name="id" value="walk-scene"/>
    </properties>
   </object>
  </objectgroup>

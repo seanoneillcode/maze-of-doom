@@ -1,8 +1,6 @@
 package simulation.story.actions;
 
 
-import simulation.story.Actor;
-
 public class PauseActionType implements SceneActionType {
 
     float time = 0;
@@ -24,7 +22,7 @@ public class PauseActionType implements SceneActionType {
     }
 
     @Override
-    public void update(Actor actor, float delta) {
+    public void update(float delta) {
         if (isStarted) {
             this.time = time - delta;
         }

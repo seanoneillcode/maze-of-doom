@@ -17,4 +17,14 @@ public enum Direction {
 	public Vector getVector() {
 		return vector;
 	}
+
+	public static Direction getDirection(Vector from, Vector to) {
+		float xdiff = to.x - from.x;
+		float ydiff = to.y - from.y;
+		if (Math.abs(xdiff) > Math.abs(ydiff)) {
+			return xdiff > 0 ? RIGHT : LEFT;
+		} else {
+			return ydiff > 0 ? UP : DOWN;
+		}
+	}
 }

@@ -24,19 +24,25 @@ public class Player extends MovingEntity implements CanBeAnimated, CanBeDamaged 
 	private boolean isUsing;
 	private Inventory inventory;
 	
-	public Player(Vector position) {
-		super(position, DefaultConstants.PLAYER_SIZE, DefaultConstants.PLAYER_SPEED);
-		weapon = new Weapon("sword", position);
+	public Player() {
+		super(new Vector(), DefaultConstants.PLAYER_SIZE, DefaultConstants.PLAYER_SPEED);
+		weapon = new Weapon("sword", new Vector());
 		health = maxHealth = DefaultConstants.DEFAULT_PLAYER_HEALTH;
 		damageState = DamageState.NONE;
 		damageCooldown = 0f;
 		dashTimer = 0;
 		isUsing = false;
-		useEntity = new Entity(position, DefaultConstants.USE_SIZE);
+		useEntity = new Entity(new Vector(), DefaultConstants.USE_SIZE);
 		inventory = new Inventory();
 		inventory.addItem(InventoryItem.SWORD);
 	}
-	
+
+	public void setPosition(Vector position) {
+		this.getEntity().setPosition(position);
+		weapon.setPosition(position);
+		useEntity.setPosition(position);
+	}
+
 	public void attack() {
 		if (hasSword() && weapon.canAttack()) {
 			weapon.attack(getDirection());
